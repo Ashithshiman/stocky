@@ -109,7 +109,7 @@
                   </b-col>
 
                   <!-- developed by -->
-                  <b-col lg="4" md="4" sm="12">
+                  <!-- <b-col lg="4" md="4" sm="12">
                     <validation-provider
                       name="developed by"
                       :rules="{ required: true}"
@@ -127,10 +127,10 @@
                         >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col>
+                  </b-col> -->
 
                    <!-- Footer -->
-                  <b-col lg="4" md="4" sm="12">
+                  <!-- <b-col lg="4" md="4" sm="12">
                     <validation-provider
                       name="footer"
                       :rules="{ required: true}"
@@ -148,7 +148,7 @@
                         >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col>
+                  </b-col> -->
 
                    <!-- Default Language -->
                   <b-col lg="4" md="4" sm="12">
@@ -213,7 +213,7 @@
                   </b-col>
 
                    <!-- Default SMS Gateway -->
-                  <b-col lg="4" md="4" sm="12">
+                  <!-- <b-col lg="4" md="4" sm="12">
                     <b-form-group :label="$t('Default_SMS_Gateway')">
                       <v-select
                         v-model="setting.sms_gateway"
@@ -222,7 +222,7 @@
                         :options="sms_gateway.map(sms_gateway => ({label: sms_gateway.title, value: sms_gateway.id}))"
                       />
                     </b-form-group>
-                  </b-col>
+                  </b-col> -->
 
                    <!-- Time_Zone -->
                   <b-col lg="4" md="4" sm="12">
