@@ -79,6 +79,7 @@
 
       </b-row>
 
+      <!-- this week and purchased -->
       <b-row>
         <b-col lg="8" md="12" sm="12">
           <b-card class="mb-30">
@@ -104,6 +105,8 @@
         </b-col>
       </b-row>
 
+
+      <!-- stock Alert  -->
       <b-row>
         <!-- Stock Alert -->
         <div class="col-md-8">
