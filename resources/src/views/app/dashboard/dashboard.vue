@@ -108,7 +108,7 @@
 
       <!-- stock Alert  -->
       <b-row>
-        <!-- Stock Alert -->
+     
         <div class="col-md-8">
           <div class="card mb-30">
             <div class="card-body p-2">
