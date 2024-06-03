@@ -108,7 +108,7 @@
 
       <!-- stock Alert  -->
       <b-row>
-     
+        <!-- Stock Alert -->
         <div class="col-md-8">
           <div class="card mb-30">
             <div class="card-body p-2">
@@ -597,7 +597,7 @@ export default {
                 data: responseData.sales.original.data,
                 label: { show: false, color: "#8B5CF6" },
                 type: "bar",
-                color: "#A78BFA",
+                color: "#14e043",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
@@ -615,7 +615,7 @@ export default {
                 label: { show: false, color: "#0168c1" },
                 type: "bar",
                 barGap: 0,
-                color: "#DDD6FE",
+                color: "#89EFA1",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
