@@ -26,7 +26,8 @@
       <i class="i-Full-Screen header-icon d-none d-sm-inline-block" @click="handleFullScreen"></i>
       <!-- Grid menu Dropdown -->
 
-      <div class="dropdown">
+      <div class="dropdown d-none">
+        <!-- Remove d-none if needed -->
         <b-dropdown
           id="dropdown"
           text="Dropdown Button"

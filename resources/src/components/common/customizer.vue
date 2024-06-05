@@ -39,7 +39,7 @@
           </div>
         </div>
 
-         <div class>
+         <div class="d-none">
           <div class="card-header">
             <p class="mb-0">Language</p>
           </div>
