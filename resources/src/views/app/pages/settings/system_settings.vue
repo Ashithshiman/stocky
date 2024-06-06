@@ -109,7 +109,7 @@
                   </b-col>
 
                   <!-- developed by -->
-                  <b-col lg="4" md="4" sm="12">
+                  <!-- <b-col lg="4" md="4" sm="12">
                     <validation-provider
                       name="developed by Fastkites"
                       :rules="{ required: true}"
@@ -127,7 +127,7 @@
                         >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col>
+                  </b-col> -->
 
                    <!-- Footer -->
                   <!-- <b-col lg="4" md="4" sm="12">
