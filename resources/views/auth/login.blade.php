@@ -8,7 +8,7 @@
     <link rel=icon href=/images/favicon.ico>
     <link rel="stylesheet" href="/css/master.css">
 
-    <title>Stocky | Ultimate Inventory With POS</title>
+    <title>FastKites | Ultimate Inventory With POS</title>
   </head>
 
   <body class="text-left">
@@ -22,7 +22,7 @@
     <!-- built files will be auto injected -->
     <div class="loading_wrap" id="loading_wrap">
       <div class="loader_logo">
-      <img src="/images/logo.png" class="" alt="logo" />
+      <!-- <img src="/images/logo.png" class="" alt="logo" /> -->
 
       </div>
 
