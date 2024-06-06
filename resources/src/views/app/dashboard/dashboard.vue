@@ -427,7 +427,7 @@ export default {
           var dark_heading = "#c2c6dc";
 
           this.echartCustomer = {
-            color: ["#6D28D9", "#8B5CF6", "#A78BFA", "#C4B5FD", "#7C3AED"],
+            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)"
@@ -497,7 +497,7 @@ export default {
             ]
           };
           this.echartProduct = {
-            color: ["#6D28D9", "#8B5CF6", "#A78BFA", "#C4B5FD", "#7C3AED"],
+            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)"
