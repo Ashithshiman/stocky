@@ -79,7 +79,6 @@
 
       </b-row>
 
-      <!-- this week and purchased -->
       <b-row>
         <b-col lg="8" md="12" sm="12">
           <b-card class="mb-30">
@@ -105,8 +104,6 @@
         </b-col>
       </b-row>
 
-
-      <!-- stock Alert  -->
       <b-row>
         <!-- Stock Alert -->
         <div class="col-md-8">
@@ -597,7 +594,7 @@ export default {
                 data: responseData.sales.original.data,
                 label: { show: false, color: "#8B5CF6" },
                 type: "bar",
-                color: "#14e043",
+                color: "#A78BFA",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
@@ -615,7 +612,7 @@ export default {
                 label: { show: false, color: "#0168c1" },
                 type: "bar",
                 barGap: 0,
-                color: "#89EFA1",
+                color: "#DDD6FE",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
