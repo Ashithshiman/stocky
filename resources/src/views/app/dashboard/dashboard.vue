@@ -18,8 +18,8 @@
         </b-col>
       </b-row>
 
-      <b-row>
-        <!-- ICON BG -->
+      <!-- <b-row> 
+        <!-- ICON BG 
 
         <b-col lg="3" md="6" sm="12">
           <router-link tag="a" class to="/app/sales/list">
@@ -77,11 +77,66 @@
           </router-link>
         </b-col>
 
-      </b-row>
+      </b-row> -->
+      <b-row>
+      <b-col lg="12" md="12" sm="12">
+        <b-card class="card-combined mb-30 text-center">
+          <b-row no-gutters>
+            <b-col lg="3" md="6" sm="12" class="column">
+              <router-link tag="a" class="card-link" to="/app/sales/list">
+                <div class="inner-card">
+                  <i class="i-Full-Cart icon"></i>
+                  <div class="content">
+                    <p class="text-muted mt-2 mb-0">{{ $t('Sales') }}</p>
+                    <p class="text-primary text-24 line-height-1 mb-2">{{ currentUser.currency }} {{ report_today.today_sales ? report_today.today_sales : 0 }}</p>
+                  </div>
+                </div>
+              </router-link>
+            </b-col>
+
+            <b-col lg="3" md="6" sm="12" class="column">
+              <router-link tag="a" class="card-link" to="/app/purchases/list">
+                <div class="inner-card">
+                  <i class="i-Add-Cart icon"></i>
+                  <div class="content">
+                    <p class="text-muted mt-2 mb-0">{{ $t('Purchases') }}</p>
+                    <p class="text-primary text-24 line-height-1 mb-2">{{ currentUser.currency }} {{ report_today.today_purchases ? report_today.today_purchases : 0 }}</p>
+                  </div>
+                </div>
+              </router-link>
+            </b-col>
+
+            <b-col lg="3" md="6" sm="12" class="column">
+              <router-link tag="a" class="card-link" to="/app/sale_return/list">
+                <div class="inner-card">
+                  <i class="i-Right-4 icon"></i>
+                  <div class="content">
+                    <p class="text-muted mt-2 mb-0">{{ $t('SalesReturn') }}</p>
+                    <p class="text-primary text-24 line-height-1 mb-2">{{ currentUser.currency }} {{ report_today.return_sales ? report_today.return_sales : 0 }}</p>
+                  </div>
+                </div>
+              </router-link>
+            </b-col>
+
+            <b-col lg="3" md="6" sm="12" class="column">
+              <router-link tag="a" class="card-link" to="/app/purchase_return/list">
+                <div class="inner-card">
+                  <i class="i-Left-4 icon"></i>
+                  <div class="content">
+                    <p class="text-muted mt-2 mb-0">{{ $t('PurchasesReturn') }}</p>
+                    <p class="text-primary text-24 line-height-1 mb-2">{{ currentUser.currency }} {{ report_today.return_purchases ? report_today.return_purchases : 0 }}</p>
+                  </div>
+                </div>
+              </router-link>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+    </b-row>
 
       <b-row>
         <b-col lg="8" md="12" sm="12">
-          <b-card class="mb-30">
+          <b-card class="mb-30 card-combined">
             <h4 class="card-title m-0">{{$t('This_Week_Sales_Purchases')}}</h4>
             <div class="chart-wrapper">
               <div v-once class="typo__p text-right" v-if="loading">
@@ -92,7 +147,7 @@
           </b-card>
         </b-col>
         <b-col col lg="4" md="12" sm="12">
-          <b-card class="mb-30">
+          <b-card class="mb-30 card-combined">
             <h4 class="card-title m-0">{{$t('Top_Selling_Products')}} ({{new Date().getFullYear()}})</h4>
             <div class="chart-wrapper">
               <div v-once class="typo__p text-right" v-if="loading">
