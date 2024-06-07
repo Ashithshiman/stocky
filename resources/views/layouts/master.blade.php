@@ -8,11 +8,7 @@
     <link rel=icon href=/images/favicon.ico>
     <link rel="stylesheet" href="/css/master.css">
 
-<<<<<<< HEAD
     <title>FastKites | Ultimate Inventory With POS</title>
-=======
-    <title>Fast Kites | Ultimate Inventory With POS</title>
->>>>>>> ismailsalih
   </head>
 
   <body class="text-left">

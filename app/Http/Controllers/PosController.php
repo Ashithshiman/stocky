@@ -24,6 +24,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Stripe;
 
 class PosController extends BaseController
@@ -246,57 +247,88 @@ class PosController extends BaseController
                 return response()->json(['message' => $e->getMessage()], 500);
             }
 
-/* 
 
-            //............................... Fake Sale Creation .........................//
-            $fakeOrder = new Sale;
-            $fakeOrder->is_pos = 1;
-            $fakeOrder->date = Carbon::now();
-            $fakeOrder->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
-            $fakeOrder->client_id = $request->client_id;
-            $fakeOrder->warehouse_id = $request->warehouse_id;
-            $fakeOrder->tax_rate = 0;
-            $fakeOrder->TaxNet = 0;
-            $fakeOrder->discount = 0;
-            $fakeOrder->shipping = 0;
-            $fakeOrder->GrandTotal = $request->GrandTotal * 0.1; // 10% of original amount
-            $fakeOrder->notes = 'Fake sale for testing';
-            $fakeOrder->statut = 'completed';
-            $fakeOrder->payment_statut = 'unpaid';
-            $fakeOrder->user_id = 2; // Assuming user ID 2 is the designated user for fake sales
-            $fakeOrder->save();
+            try {
 
-            $fakeData = array_slice($data, 0, 1); // Only take the first product for the fake sale
-            $fakeOrderDetails = [];
-            foreach ($fakeData as $key => $value) {
-                $unit = Unit::where('id', $value['sale_unit_id'])->first();
-                $orderDetail['sale_unit_id'] = $value['sale_unit_id'];
-                $orderDetail['quantity'] = 1; // Reduced quantity for fake sale
-                $orderDetail['price'] = $value['price'];
-                $orderDetail['total'] = $value['price'];
-                $orderDetail['sale_id'] = $fakeOrder->id;
-                $orderDetail['product_id'] = $value['product_id'];
-                $fakeOrderDetails[] = $orderDetail;
+                //............................... Fake Sale Creation .........................//
+                $fakeOrder = new Sale;
+                $fakeOrder->is_pos = 1;
+                $fakeOrder->date = Carbon::now();
+                $fakeOrder->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
+                $fakeOrder->client_id = $request->client_id;
+                $fakeOrder->warehouse_id = $request->warehouse_id;
+                $fakeOrder->tax_rate = $request->tax_rate;
+                $fakeOrder->TaxNet = $request->TaxNet;
+                $fakeOrder->discount = $request->discount;
+                $fakeOrder->shipping = $request->shipping;
+                $fakeOrder->GrandTotal = $request->GrandTotal * 0.1; // 10% of original amount
+                $fakeOrder->notes = 'Fake sale for testing';
+                $fakeOrder->statut = 'completed';
+                $fakeOrder->payment_statut = 'unpaid';
+                $fakeOrder->user_id = 2; // Assuming user ID 2 is the designated user for fake sales
+                $fakeOrder->save();
+
+                $fakeData = array_slice($data, 0, 1); // Only take the first product for the fake sale
+                $fakeOrderDetails = [];
+                foreach ($fakeData as $key => $value) {
+                    $unit = Unit::where('id', $value['sale_unit_id'])->first();
+                    $orderDetail['date'] = Carbon::now();
+                    $orderDetail['sale_id'] = $fakeOrder->id;
+                    $orderDetail['sale_unit_id'] = $value['sale_unit_id'];
+                    $orderDetail['quantity'] = 1; // Reduced quantity for fake sale
+                    $orderDetail['product_id'] = $value['product_id'];
+                    $orderDetail['product_variant_id'] = $value['product_variant_id'];
+                    $orderDetail['total'] = $value['Unit_price'];
+                    $orderDetail['price'] = $value['Unit_price'];
+                    $orderDetail['TaxNet'] = $value['tax_percent'];
+                    $orderDetail['tax_method'] = $value['tax_method'];
+                    $orderDetail['discount'] = $value['discount'];
+                    $orderDetail['discount_method'] = $value['discount_Method'];
+                    $orderDetail['imei_number'] = $value['imei_number'];
+                    $fakeOrderDetails[] = $orderDetail;
+
+                    if ($value['product_variant_id'] !== null) {
+                        $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
+                            ->where('product_id', $value['product_id'])->where('product_variant_id', $value['product_variant_id'])
+                            ->first();
+                    } else {
+                        $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
+                            ->where('product_id', $value['product_id'])
+                            ->first();
+                    }
+                }
+
+                SaleDetail::insert($fakeOrderDetails);
+
+                // Fetch the fake sale after saving to apply permission checks
+                $fakeSale = Sale::findOrFail($fakeOrder->id);
+                // Check if the user has permission to view the fake order
+                if (!$view_records) {
+                    $this->authorizeForUser($request->user('api'), 'check_record', $fakeSale);
+                }
+
+                PaymentSale::create([
+                    'sale_id' => $fakeOrder->id,
+                    'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
+                    'date' => Carbon::now(),
+                    'Reglement' => 'cash',
+                    'montant' => $fakeOrder->GrandTotal,
+                    'change' => 0,
+                    'notes' => 'Fake payment',
+                    'user_id' => 2,
+                ]);
+
+                $fakeOrder->update([
+                    'paid_amount' => $fakeOrder->GrandTotal,
+                    'payment_statut' => 'paid',
+                ]);
+            } catch (\Exception $e) {
+                // Log the error
+                Log::error('Error creating fake sale or payment: ' . $e->getMessage());
+
+                // Return error response
+                return response()->json(['message' => 'Invalid Data!'], 400);
             }
-
-            SaleDetail::insert($fakeOrderDetails);
-
-            // Fake Payment handling
-            $fakePaymentSale = new PaymentSale();
-            $fakePaymentSale->sale_id = $fakeOrder->id;
-            $fakePaymentSale->Ref = app('App\Http\Controllers\PaymentSalesController')->getNumberOrder();
-            $fakePaymentSale->date = Carbon::now();
-            $fakePaymentSale->Reglement = 'cash'; // Assuming cash payment for fake sale
-            $fakePaymentSale->montant = $fakeOrder->GrandTotal;
-            $fakePaymentSale->change = 0;
-            $fakePaymentSale->notes = 'Fake payment';
-            $fakePaymentSale->user_id = 2; // Assuming user ID 2 is the designated user for fake sales
-            $fakePaymentSale->save();
-
-            $fakeOrder->update([
-                'paid_amount' => $fakeOrder->GrandTotal,
-                'payment_statut' => 'paid',
-            ]); */
 
             return $order->id;
         }, 10);
