@@ -212,7 +212,7 @@ content: '';
 
 .card-combined {
     background: linear-gradient(70deg, #05100c, #042419, #05100c);
-    color: #cfd2da;
+    color: #00fdab !important;
     border-radius: 15px;
     border: 3px solid #28a745; /* Green border */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -232,7 +232,7 @@ content: '';
   }
   
   .card-combined .content p.text-primary {
-    color: #0d9666;
+    color: #04f29f !important;
   }
   
   .card-combined .content p.text-muted {
