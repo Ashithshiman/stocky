@@ -33,7 +33,7 @@ $grays: map-merge((
   "800": $gray-800,
   "900": $gray-900
 ), $grays);
-
+$custom-color:#00fdab !default;
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
@@ -58,11 +58,12 @@ $colors: map-merge((
   "teal":       $teal,
   "cyan":       $cyan,
   "white":      $white,
+  "custom-color": $custom-color,
   "gray":       $gray-600,
   "gray-dark":  $gray-800
 ), $colors);
 
-$primary:       $blue !default;
+$primary:       $custom-color !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
