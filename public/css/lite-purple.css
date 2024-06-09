@@ -8973,7 +8973,7 @@ input[type=color].form-control:disabled {
   --cyan: #06b6d4;
   --white: #fff;
   --gray: #4B5563;
-  --primary: #8b5cf6;
+  --primary: #00fdab;
   --secondary: #1F2937;
   --success: #10b981;
   --info: #3b82f6;
@@ -9139,7 +9139,7 @@ sup {
 }
 
 a {
-  color: #8b5cf6;
+  color: #00fdab;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -27655,7 +27655,8 @@ a.typo_link.text-gray-900:after {
 }
 
 .layout-sidebar-compact.sidenav-open .main-content-wrap {
-  width: calc( 100% - 76px - 220px);
+  width: calc(
+ 100% - 76px - 220px);
 }
 
 .layout-sidebar-compact.sidenav-open .sidebar-left {
@@ -27905,7 +27906,8 @@ a.typo_link.text-gray-900:after {
 .layout-sidebar-compact .sidebar-overlay {
   display: none;
   position: fixed;
-  width: calc( 100% - 76px - 220px);
+  width: calc(
+ 100% - 76px - 220px);
   height: calc(100vh - 80px);
   bottom: 0;
   right: 0;
@@ -28028,7 +28030,7 @@ a.typo_link.text-gray-900:after {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  background: #fff;
+  background-color: #050a08 !important;
   z-index: 100;
 }
 
@@ -28294,11 +28296,11 @@ a.typo_link.text-gray-900:after {
 }
 
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item.active {
-  color: #8b5cf6;
+	color: #00fdab !important;
 }
 
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item.active .nav-item-hold {
-  color: #8b5cf6;
+  color: #00fdab !important;
 }
 
 .layout-sidebar-large .sidebar-left .navigation-left .nav-item .nav-item-hold {
@@ -28450,7 +28452,8 @@ a.typo_link.text-gray-900:after {
 .layout-sidebar-large .sidebar-overlay {
   display: none;
   position: fixed;
-  width: calc( 100% - 120px - 220px);
+  width: calc(
+ 100% - 120px - 220px);
   height: calc(100vh - 80px);
   bottom: 0;
   right: 0;

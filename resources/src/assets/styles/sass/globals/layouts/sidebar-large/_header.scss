@@ -8,7 +8,9 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    background: $background;
+    background: #050a08 !important;
+    border-bottom: 3px solid #28a745; /* Green bottom border */
+
     z-index: 100;
     .menu-toggle {
       width: 90px;

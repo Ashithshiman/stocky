@@ -25,7 +25,7 @@
                             to="/app/dashboard"
                         >
                             <i class="nav-icon i-Bar-Chart"></i>
-                            <span class="nav-text">{{ $t("dashboard") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'dashboard' ? '#00fdab' : '' }">{{ $t("dashboard") }}</span>
                         </router-link>
                     </li>
                     <li
@@ -50,7 +50,7 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Library-2"></i>
-                            <span class="nav-text">{{ $t("Products") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'products' ? '#00fdab' : '' }">{{ $t("products") }}</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -72,9 +72,7 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Edit-Map"></i>
-                            <span class="nav-text">{{
-                                $t("StockAdjustement")
-                            }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'adjustments' ? '#00fdab' : '' }">{{ $t("adjustments") }}</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -97,7 +95,7 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Checkout-Basket"></i>
-                            <span class="nav-text">{{ $t("Quotations") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'quotations' ? '#00fdab' : '' }">{{ $t("quotations") }}</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -119,7 +117,7 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Receipt"></i>
-                            <span class="nav-text">{{ $t("Purchases") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'purchases' ? '#00fdab' : '' }">{{ $t("purchases") }}</span>
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -139,7 +137,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Full-Cart"></i>
-                            <span class="nav-text">{{ $t("Sales") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'sales' ? '#00fdab' : '' }">{{ $t("sales") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -160,9 +159,8 @@
                             to="/app/sale_return/list"
                         >
                             <i class="nav-icon i-Right"></i>
-                            <span class="nav-text">{{
-                                $t("SalesReturn")
-                            }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'sale_return' ? '#00fdab' : '' }">{{ $t("sale_return") }}</span>
+
                         </router-link>
                     </li>
 
@@ -186,9 +184,8 @@
                             to="/app/purchase_return/list"
                         >
                             <i class="nav-icon i-Left"></i>
-                            <span class="nav-text">{{
-                                $t("PurchasesReturn")
-                            }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'purchase_return' ? '#00fdab' : '' }">{{ $t("purchase_return") }}</span>
+
                         </router-link>
                     </li>
 
@@ -218,7 +215,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Library"></i>
-                            <span class="nav-text">{{ $t("hrm") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'hrm' ? '#00fdab' : '' }">{{ $t("hrm") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -237,9 +235,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Back"></i>
-                            <span class="nav-text">{{
-                                $t("StockTransfers")
-                            }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'transfers' ? '#00fdab' : '' }">{{ $t("transfers") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -257,7 +254,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Wallet"></i>
-                            <span class="nav-text">{{ $t("Expenses") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'expenses' ? '#00fdab' : '' }">{{ $t("expenses") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -281,7 +279,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Business-Mens"></i>
-                            <span class="nav-text">{{ $t("People") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'People' ? '#00fdab' : '' }">{{ $t("People") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -322,7 +321,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Data-Settings"></i>
-                            <span class="nav-text">{{ $t("Settings") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'settings' ? '#00fdab' : '' }">{{ $t("settings") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
@@ -391,7 +391,8 @@
                     >
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Line-Chart"></i>
-                            <span class="nav-text">{{ $t("Reports") }}</span>
+                            <span class="nav-text" :style="{ color: selectedParentMenu == 'reports' ? '#00fdab' : '' }">{{ $t("reports") }}</span>
+
                         </a>
                         <div class="triangle"></div>
                     </li>
