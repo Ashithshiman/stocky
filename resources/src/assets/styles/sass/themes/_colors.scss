@@ -1,3 +1,4 @@
+
 $solid-colors: (
   "blue": #3b82f6,
   "midnight-blue": #0c0c3c,
@@ -13,12 +14,13 @@ $solid-colors: (
   "cyan": #06b6d4,
   "gray": #71717a,
   "slate-gray": #64748b,
+  "custom-color": #00fdab // Added custom color
 );
 
 // Gradient colors
 $gradient-colors: (
   gradient-purple-indigo: (
-    "start-color": #8b5cf6,
+    "start-color": #00fdab,
     "end-color": #33214b,
   ),
   gradient-black-blue: (

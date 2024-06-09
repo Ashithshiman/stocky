@@ -109,8 +109,14 @@ class DashboardController extends Controller
                     return $query->whereIn('warehouse_id', $array_warehouses_id);
                 }
             })
-            
-            ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get([
                 DB::raw(DB::raw("DATE_FORMAT(date,'%Y-%m-%d') as date")),
@@ -164,6 +170,14 @@ class DashboardController extends Controller
                     return $query->whereIn('warehouse_id', $array_warehouses_id);
                 }
             })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get([
@@ -210,8 +224,14 @@ class DashboardController extends Controller
                     return $query->whereIn('sales.warehouse_id', $array_warehouses_id);
                 }
             })
-
-            ->join('clients', 'sales.client_id', '=', 'clients.id')
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })->join('clients', 'sales.client_id', '=', 'clients.id')
             ->select(DB::raw('clients.name'), DB::raw("count(*) as value"))
             ->groupBy('clients.name')
             ->orderBy('value', 'desc')
@@ -351,6 +371,14 @@ class DashboardController extends Controller
                 return $query->whereIn('warehouse_id', $array_warehouses_id);
             }
         })
+        ->where(function ($query) {
+            $user = Auth::user();
+            if ($user->id !== 2) {
+                $query->where('user_id', '!=', 2);
+            } else {
+                $query->where('user_id', 2);
+            }
+        })
         ->get(DB::raw('SUM(GrandTotal)  As sum'))
         ->first()->sum;
 
@@ -373,6 +401,14 @@ class DashboardController extends Controller
                 return $query->whereIn('warehouse_id', $array_warehouses_id);
             }
         })
+        ->where(function ($query) {
+            $user = Auth::user();
+            if ($user->id !== 2) {
+                $query->where('user_id', '!=', 2);
+            } else {
+                $query->where('user_id', 2);
+            }
+        })
         ->get(DB::raw('SUM(GrandTotal)  As sum'))
         ->first()->sum; 
 
@@ -392,6 +428,14 @@ class DashboardController extends Controller
                 return $query->where('warehouse_id', $warehouse_id);
             }else{
                 return $query->whereIn('warehouse_id', $array_warehouses_id);
+            }
+        })
+        ->where(function ($query) {
+            $user = Auth::user();
+            if ($user->id !== 2) {
+                $query->where('user_id', '!=', 2);
+            } else {
+                $query->where('user_id', 2);
             }
         })
         ->get(DB::raw('SUM(GrandTotal)  As sum'))
@@ -434,6 +478,14 @@ class DashboardController extends Controller
                     return $query->where('warehouse_id', $warehouse_id);
                 }else{
                     return $query->whereIn('warehouse_id', $array_warehouses_id);
+                }
+            })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
                 }
             })
             ->orderBy('id', 'desc')
@@ -498,6 +550,14 @@ class DashboardController extends Controller
 
                 }
             })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get([
@@ -522,6 +582,14 @@ class DashboardController extends Controller
                         $q->whereIn('warehouse_id', $array_warehouses_id);
                     });
 
+                }
+            })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
                 }
             })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
@@ -550,6 +618,14 @@ class DashboardController extends Controller
 
                 }
             })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get([
@@ -576,6 +652,14 @@ class DashboardController extends Controller
 
                 }
             })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
+                }
+            })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))
             ->orderBy('date', 'asc')
             ->get([
@@ -595,6 +679,14 @@ class DashboardController extends Controller
                     return $query->where('warehouse_id', $warehouse_id);
                 }else{
                     return $query->whereIn('warehouse_id', $array_warehouses_id);
+                }
+            })
+            ->where(function ($query) {
+                $user = Auth::user();
+                if ($user->id !== 2) {
+                    $query->where('user_id', '!=', 2);
+                } else {
+                    $query->where('user_id', 2);
                 }
             })
             ->groupBy(DB::raw("DATE_FORMAT(date,'%Y-%m-%d')"))

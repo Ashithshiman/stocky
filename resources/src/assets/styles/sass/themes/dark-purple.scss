@@ -1,6 +1,7 @@
 @import "../variables";
 @import "colors";
 
+$custom-color:  #00fdab ;
 $blue: #263db5 !default;
 $indigo: #6610f2 !default;
 $purple: #8b5cf6 !default;
@@ -14,7 +15,7 @@ $cyan: #9c27b0 !default;
 $grey-r: #6c7293 !default;
 $grey-l: #a7abc3 !default;
 $grey-light: #f7f8fa !default;
-$primary-base: $purple;
+$primary-base: $custom-color;
 $white: darken(desaturate($primary-base, 40), 25) !default;
 $gray-100: darken(desaturate($primary-base, 40), 20) !default;
 $gray-200: darken(desaturate($primary-base, 40), 15) !default;
@@ -42,6 +43,7 @@ $dark-bg: #10163a;
 $dark-forground: #1c233f;
 $dark-heading: #c2c6dc;
 $colors: (
+  green:$custom-color
   blue: $blue,
   indigo: $indigo,
   purple: $purple,

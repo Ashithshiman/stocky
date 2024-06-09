@@ -207,3 +207,42 @@ content: '';
         }
     }
 }
+
+// custom code
+
+.card-combined {
+    background: linear-gradient(70deg, #05100c, #042419, #05100c);
+    color: #cfd2da;
+    border-radius: 15px;
+    border: 3px solid #28a745; /* Green border */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-combined .inner-card {
+    padding: 15px;
+  }
+  
+  .card-combined .icon {
+    font-size: 48px;
+    color: #ffffff;
+  }
+  
+  .card-combined .content p {
+    margin: 0;
+  }
+  
+  .card-combined .content p.text-primary {
+    color: #0d9666;
+  }
+  
+  .card-combined .content p.text-muted {
+    color: #fefefe;
+  }
+  
+  .column {
+    border-right: 2px solid #28a745; /* Green vertical line */
+  }
+  
+  .column:last-child {
+    border-right: none; /* Remove border from the last column */
+  }

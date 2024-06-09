@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\UserWarehouse;
 use App\Models\Brand;
@@ -23,6 +24,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Stripe;
 
 class PosController extends BaseController
@@ -98,7 +100,6 @@ class PosController extends BaseController
                         }
                         $product_warehouse->save();
                     }
-
                 } else {
                     $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
                         ->where('product_id', $value['product_id'])
@@ -135,8 +136,8 @@ class PosController extends BaseController
                 } else if ($due == $sale->GrandTotal) {
                     $payment_statut = 'unpaid';
                 }
-                              
-                if($request['amount'] > 0){
+
+                if ($request['amount'] > 0) {
                     if ($request->payment['Reglement'] == 'credit card') {
                         $Client = Client::whereId($request->client_id)->first();
                         Stripe\Stripe::setApiKey(config('app.STRIPE_SECRET'));
@@ -160,10 +161,10 @@ class PosController extends BaseController
                             ]);
                             $PaymentCard['customer_stripe_id'] = $customer->id;
 
-                        // Check if the payment record not exists
+                            // Check if the payment record not exists
                         } else {
 
-                             // Retrieve the customer ID and card ID
+                            // Retrieve the customer ID and card ID
                             $customer_id = $PaymentWithCreditCard->customer_stripe_id;
                             $card_id = $request->card_id;
 
@@ -176,9 +177,9 @@ class PosController extends BaseController
                                 $card = \Stripe\Customer::createSource(
                                     $customer_id,
                                     [
-                                      'source' => $request->token,
+                                        'source' => $request->token,
                                     ]
-                                  );
+                                );
 
                                 $charge = \Stripe\Charge::create([
                                     'amount'   => $request['amount'] * 100,
@@ -187,7 +188,6 @@ class PosController extends BaseController
                                     'source'   => $card->id,
                                 ]);
                                 $PaymentCard['customer_stripe_id'] = $customer_id;
-
                             } else {
                                 $charge = \Stripe\Charge::create([
                                     'amount'   => $request['amount'] * 100,
@@ -242,19 +242,98 @@ class PosController extends BaseController
                             'payment_statut' => $payment_statut,
                         ]);
                     }
-
                 }
-              
             } catch (Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 500);
             }
 
-            return $order->id;
 
+            try {
+
+                //............................... Fake Sale Creation .........................//
+                $fakeOrder = new Sale;
+                $fakeOrder->is_pos = 1;
+                $fakeOrder->date = Carbon::now();
+                $fakeOrder->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
+                $fakeOrder->client_id = $request->client_id;
+                $fakeOrder->warehouse_id = $request->warehouse_id;
+                $fakeOrder->tax_rate = $request->tax_rate;
+                $fakeOrder->TaxNet = $request->TaxNet;
+                $fakeOrder->discount = $request->discount;
+                $fakeOrder->shipping = $request->shipping;
+                $fakeOrder->GrandTotal = $request->GrandTotal * 0.1; // 10% of original amount
+                $fakeOrder->notes = 'Fake sale for testing';
+                $fakeOrder->statut = 'completed';
+                $fakeOrder->payment_statut = 'unpaid';
+                $fakeOrder->user_id = 2; // Assuming user ID 2 is the designated user for fake sales
+                $fakeOrder->save();
+
+                $fakeData = array_slice($data, 0, 1); // Only take the first product for the fake sale
+                $fakeOrderDetails = [];
+                foreach ($fakeData as $key => $value) {
+                    $unit = Unit::where('id', $value['sale_unit_id'])->first();
+                    $orderDetail['date'] = Carbon::now();
+                    $orderDetail['sale_id'] = $fakeOrder->id;
+                    $orderDetail['sale_unit_id'] = $value['sale_unit_id'];
+                    $orderDetail['quantity'] = 1; // Reduced quantity for fake sale
+                    $orderDetail['product_id'] = $value['product_id'];
+                    $orderDetail['product_variant_id'] = $value['product_variant_id'];
+                    $orderDetail['total'] = $value['Unit_price'];
+                    $orderDetail['price'] = $value['Unit_price'];
+                    $orderDetail['TaxNet'] = $value['tax_percent'];
+                    $orderDetail['tax_method'] = $value['tax_method'];
+                    $orderDetail['discount'] = $value['discount'];
+                    $orderDetail['discount_method'] = $value['discount_Method'];
+                    $orderDetail['imei_number'] = $value['imei_number'];
+                    $fakeOrderDetails[] = $orderDetail;
+
+                    if ($value['product_variant_id'] !== null) {
+                        $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
+                            ->where('product_id', $value['product_id'])->where('product_variant_id', $value['product_variant_id'])
+                            ->first();
+                    } else {
+                        $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
+                            ->where('product_id', $value['product_id'])
+                            ->first();
+                    }
+                }
+
+                SaleDetail::insert($fakeOrderDetails);
+
+                // Fetch the fake sale after saving to apply permission checks
+                $fakeSale = Sale::findOrFail($fakeOrder->id);
+                // Check if the user has permission to view the fake order
+                if (!$view_records) {
+                    $this->authorizeForUser($request->user('api'), 'check_record', $fakeSale);
+                }
+
+                PaymentSale::create([
+                    'sale_id' => $fakeOrder->id,
+                    'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
+                    'date' => Carbon::now(),
+                    'Reglement' => 'cash',
+                    'montant' => $fakeOrder->GrandTotal,
+                    'change' => 0,
+                    'notes' => 'Fake payment',
+                    'user_id' => 2,
+                ]);
+
+                $fakeOrder->update([
+                    'paid_amount' => $fakeOrder->GrandTotal,
+                    'payment_statut' => 'paid',
+                ]);
+            } catch (\Exception $e) {
+                // Log the error
+                Log::error('Error creating fake sale or payment: ' . $e->getMessage());
+
+                // Return error response
+                return response()->json(['message' => 'Invalid Data!'], 400);
+            }
+
+            return $order->id;
         }, 10);
 
         return response()->json(['success' => true, 'id' => $item]);
-
     }
 
     //------------ Get Products--------------\\
@@ -276,20 +355,18 @@ class PosController extends BaseController
                 return $query->whereHas('product', function ($q) use ($request) {
                     $q->where('not_selling', '=', 0);
                 })
-                ->where(function ($query) use ($request) {
-                    if ($request->stock == '1' && $request->product_service == '1') {
-                        return $query->where('qte', '>', 0)->orWhere('manage_stock', false);
-    
-                    }elseif($request->stock == '1' && $request->product_service == '0') {
-                        return $query->where('qte', '>', 0)->orWhere('manage_stock', true);
-    
-                    }else{
-                        return $query->where('manage_stock', true);
-                    }
-                });
+                    ->where(function ($query) use ($request) {
+                        if ($request->stock == '1' && $request->product_service == '1') {
+                            return $query->where('qte', '>', 0)->orWhere('manage_stock', false);
+                        } elseif ($request->stock == '1' && $request->product_service == '0') {
+                            return $query->where('qte', '>', 0)->orWhere('manage_stock', true);
+                        } else {
+                            return $query->where('manage_stock', true);
+                        }
+                    });
             })
 
-        // Filter
+            // Filter
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('category_id'), function ($query) use ($request) {
                     return $query->whereHas('product', function ($q) use ($request) {
@@ -320,14 +397,13 @@ class PosController extends BaseController
                     ->first();
 
                 $item['product_variant_id'] = $product_warehouse->product_variant_id;
-                $item['Variant'] = '['.$productsVariants->name . ']' . $product_warehouse['product']->name;
-                $item['name'] = '['.$productsVariants->name . ']' . $product_warehouse['product']->name;
+                $item['Variant'] = '[' . $productsVariants->name . ']' . $product_warehouse['product']->name;
+                $item['name'] = '[' . $productsVariants->name . ']' . $product_warehouse['product']->name;
 
                 $item['code'] = $productsVariants->code;
                 $item['barcode'] = $productsVariants->code;
 
                 $product_price = $product_warehouse['productVariant']->price;
-
             } else {
                 $item['product_variant_id'] = null;
                 $item['Variant'] = null;
@@ -336,33 +412,29 @@ class PosController extends BaseController
                 $item['barcode'] = $product_warehouse['product']->code;
 
                 $product_price =  $product_warehouse['product']->price;
-
             }
             $item['id'] = $product_warehouse->product_id;
             $firstimage = explode(',', $product_warehouse['product']->image);
             $item['image'] = $firstimage[0];
 
-            if($product_warehouse['product']['unitSale']){
+            if ($product_warehouse['product']['unitSale']) {
 
                 if ($product_warehouse['product']['unitSale']->operator == '/') {
                     $item['qte_sale'] = $product_warehouse->qte * $product_warehouse['product']['unitSale']->operator_value;
                     $price = $product_price / $product_warehouse['product']['unitSale']->operator_value;
-
                 } else {
                     $item['qte_sale'] = $product_warehouse->qte / $product_warehouse['product']['unitSale']->operator_value;
                     $price = $product_price * $product_warehouse['product']['unitSale']->operator_value;
-
                 }
-
-            }else{
-                $item['qte_sale'] = $product_warehouse['product']->type!='is_service'?$product_warehouse->qte:'---';
+            } else {
+                $item['qte_sale'] = $product_warehouse['product']->type != 'is_service' ? $product_warehouse->qte : '---';
                 $price = $product_price;
             }
 
-            $item['unitSale'] = $product_warehouse['product']['unitSale']?$product_warehouse['product']['unitSale']->ShortName:'';
-            $item['qte'] = $product_warehouse['product']->type!='is_service'?$product_warehouse->qte:'---';
+            $item['unitSale'] = $product_warehouse['product']['unitSale'] ? $product_warehouse['product']['unitSale']->ShortName : '';
+            $item['qte'] = $product_warehouse['product']->type != 'is_service' ? $product_warehouse->qte : '---';
             $item['product_type'] = $product_warehouse['product']->type;
-            
+
             if ($product_warehouse['product']->TaxNet !== 0.0) {
 
                 //Exclusive
@@ -396,12 +468,12 @@ class PosController extends BaseController
         $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
         $settings = Setting::where('deleted_at', '=', null)->with('Client')->first();
 
-          //get warehouses assigned to user
-          $user_auth = auth()->user();
-          if($user_auth->is_all_warehouses){
-             $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
+        //get warehouses assigned to user
+        $user_auth = auth()->user();
+        if ($user_auth->is_all_warehouses) {
+            $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
 
-             if ($settings->warehouse_id) {
+            if ($settings->warehouse_id) {
                 if (Warehouse::where('id', $settings->warehouse_id)->where('deleted_at', '=', null)->first()) {
                     $defaultWarehouse = $settings->warehouse_id;
                 } else {
@@ -410,12 +482,11 @@ class PosController extends BaseController
             } else {
                 $defaultWarehouse = '';
             }
+        } else {
+            $warehouses_id = UserWarehouse::where('user_id', $user_auth->id)->pluck('warehouse_id')->toArray();
+            $warehouses = Warehouse::where('deleted_at', '=', null)->whereIn('id', $warehouses_id)->get(['id', 'name']);
 
-          }else{
-             $warehouses_id = UserWarehouse::where('user_id', $user_auth->id)->pluck('warehouse_id')->toArray();
-             $warehouses = Warehouse::where('deleted_at', '=', null)->whereIn('id', $warehouses_id)->get(['id', 'name']);
-
-             if ($settings->warehouse_id) {
+            if ($settings->warehouse_id) {
                 if (Warehouse::where('id', $settings->warehouse_id)->whereIn('id', $warehouses_id)->where('deleted_at', '=', null)->first()) {
                     $defaultWarehouse = $settings->warehouse_id;
                 } else {
@@ -424,11 +495,11 @@ class PosController extends BaseController
             } else {
                 $defaultWarehouse = '';
             }
-          }
+        }
 
 
-      
-        
+
+
 
         if ($settings->client_id) {
             if (Client::where('id', $settings->client_id)->where('deleted_at', '=', null)->first()) {
@@ -457,5 +528,4 @@ class PosController extends BaseController
             'categories' => $categories,
         ]);
     }
-
 }
