@@ -19,7 +19,7 @@
       </b-row>
 
       <!-- <b-row> 
-        <!-- ICON BG 
+        ICON BG 
 
         <b-col lg="3" md="6" sm="12">
           <router-link tag="a" class to="/app/sales/list">
@@ -162,13 +162,13 @@
       <b-row>
         <!-- Stock Alert -->
         <div class="col-md-8">
-          <div class="card mb-30">
-            <div class="card-body p-2">
+          <div class=" card-combined card mb-30">
+            <div class=" card-combined card-body p-2">
               <h5 class="card-title border-bottom p-3 mb-2">{{$t('StockAlert')}}</h5>
 
               <vue-good-table
                 :columns="columns_stock"
-                styleClass="order-table vgt-table mb-3"
+                styleClass="card-combined order-table vgt-table mb-3"
                 row-style-class="text-left"
                 :rows="stock_alerts"
               >
@@ -184,14 +184,14 @@
 
         <div class="col-md-4">
           <div class="card mb-30">
-            <div class="card-body p-3">
+            <div class=" card-combined card-body p-3">
               <h5
                 class="card-title border-bottom p-3 mb-2"
               >{{$t('Top_Selling_Products')}} ({{CurrentMonth}})</h5>
 
               <vue-good-table
                 :columns="columns_products"
-                styleClass="order-table vgt-table"
+                styleClass="card-combined order-table vgt-table"
                 row-style-class="text-left"
                 :rows="products"
               >
@@ -229,13 +229,13 @@
       <b-row>
         <div class="col-md-12">
           <div class="card mb-30">
-            <div class="card-body p-0">
+            <div class=" card-combined card-body p-0">
               <h5 class="card-title border-bottom p-3 mb-2">{{$t('Recent_Sales')}}</h5>
 
               <vue-good-table
                 v-if="!loading"
                 :columns="columns_sales"
-                styleClass="order-table vgt-table"
+                styleClass="card-combined order-table vgt-table"
                 row-style-class="text-left"
                 :rows="sales"
               >

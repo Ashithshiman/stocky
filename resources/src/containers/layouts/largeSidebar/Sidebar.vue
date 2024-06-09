@@ -9,10 +9,14 @@
             :settings="{ suppressScrollX: true, wheelPropagation: false }"
             :class="{ open: getSideBarToggleProperties.isSideNavOpen }"
             ref="myData"
-            class="sidebar-left rtl-ps-none ps scroll"
+            class="sidebar-left rtl-ps-none ps scroll  "
+            :style="{
+        // backgroundColor: selectedParentMenu == 'dashboard' ? '#050a08' : '',
+        borderRight: selectedParentMenu == 'dashboard' ? '3px solid #28a745' : ''
+    }"
         >
             <div>
-                <ul class="navigation-left">
+                <ul class="navigation-left custom">
                     <li
                         @mouseenter="toggleSubMenu"
                         :class="{ active: selectedParentMenu == 'dashboard' }"
@@ -1578,4 +1582,6 @@ export default {
 };
 </script>
 
-<style lang="" scoped></style>
+<style lang="" scoped>
+
+</style>

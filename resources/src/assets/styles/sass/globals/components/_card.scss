@@ -15,6 +15,7 @@
 .card-title {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    color: white !important;
 }
 .card-img-overlay {
     * {
@@ -216,6 +217,7 @@ content: '';
     border-radius: 15px;
     border: 3px solid #28a745; /* Green border */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    
   }
   
   .card-combined .inner-card {
@@ -236,7 +238,7 @@ content: '';
   }
   
   .card-combined .content p.text-muted {
-    color: #fefefe;
+    color: #ffffff !important;
   }
   
   .column {

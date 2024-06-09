@@ -35868,11 +35868,11 @@ th.line-numbers {
 }
 
 .order-table.vgt-table thead th {
-  color: #111827;
+  color: #fff !important;
   vertical-align: bottom;
   border-bottom: 0px solid #dcdfe6;
   padding-right: 1.5em;
-  background: transparent;
+  background-color: red !important;
   min-width: 140px !important;
   font-size: 14px;
   font-weight: 600 !important;
@@ -35882,7 +35882,7 @@ th.line-numbers {
   padding: 10px;
   vertical-align: middle;
   border-bottom: 0px solid #dcdfe6;
-  color: #111827;
+  color: #fff !important ;
   font-size: 14px;
   min-width: 140px !important;
 }
@@ -40500,7 +40500,7 @@ blockquote {
 }
 
 .dark-theme .order-table.vgt-table tbody tr:hover {
-  background: #202020;
+  background: #fff;
   border-radius: 10px;
 }
 
