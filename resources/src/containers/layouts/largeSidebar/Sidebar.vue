@@ -26,7 +26,7 @@
                         <router-link
                             tag="a"
                             class="nav-item-hold"
-                            to="/app/dashboard"
+                            to="/app/dashboard" 
                         >
                             <i class="nav-icon i-Bar-Chart"></i>
                             <span class="nav-text" :style="{ color: selectedParentMenu == 'dashboard' ? '#00fdab' : '' }">{{ $t("dashboard") }}</span>

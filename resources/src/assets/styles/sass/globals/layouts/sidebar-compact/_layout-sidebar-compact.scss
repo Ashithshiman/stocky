@@ -89,7 +89,7 @@
           width: 100%;
           padding: 22px 0;
           display: block;
-          color: #bd0101;
+          color: #be0000 !important;
           &:focus,
           &:active {
             outline: none;
@@ -127,7 +127,7 @@
     width: $sidebar-left-secondary-width;
     padding: 0.75rem 0;
     transition: left 0.24s ease-in-out;
-    background: $background;
+    background: #050a08;
     .sidebar-close {
       display: none;
       position: absolute;
@@ -250,7 +250,7 @@
     height: calc(100vh - #{$topbar-height});
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(207, 10, 10, 0);
     z-index: 101;
     cursor: w-resize;
     &.open {

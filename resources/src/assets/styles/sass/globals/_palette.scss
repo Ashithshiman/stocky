@@ -21,11 +21,11 @@
 @each $color_name, $color in $solid-colors {
     .sidebar-#{$color_name} {
         .sidebar-left {
-            background: $color;
+            background: #00fdab !important;
         }
     }
     .#{$color_name} {
-        background: $color;
+        background:#00fdab !important;
     }
 }
 

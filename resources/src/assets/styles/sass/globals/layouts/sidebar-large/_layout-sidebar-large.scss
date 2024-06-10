@@ -24,7 +24,9 @@
     position: fixed;
     top: $topbar-height;
     height: calc(100vh - #{$topbar-height});
-    background: $background;
+    color: #00fdab !important;
+    background: linear-gradient(70deg, #05100c, #042419, #05100c) !important;
+
     box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06),
       0 1px 4px rgba(0, 0, 0, 0.08);
   }
@@ -63,14 +65,16 @@
         &.active {
           color: #00fdab;
           .nav-item-hold {
-            color: #00fdab;
+            color: #ffffff;
+            background: linear-gradient(70deg, #05100c, #042419, #05100c);
+
           }
         }
         .nav-item-hold {
           display: block;
           width: 100%;
           padding: 26px 0;
-          color: $foreground;
+          color: #ffffff;
           &:focus,
           &:active {
             outline: none;
@@ -87,9 +91,10 @@
             font-size: 13px;
             display: block;
             font-weight: 400;
+            color: #00fdab !important;
           }
           a {
-            color: #00fdab;
+            color: #00fdab !important;
           }
         }
         &.active .triangle {

@@ -70,8 +70,8 @@ html [type="button"],
     border-color: $gray-700;
     &.active,
     &:hover {
-        background: $primary;
-        border-color: $primary;
+        background: #00fdab !important;
+        border-color: #00fdab !important;
         svg {
             fill: #ffffff;
         }
