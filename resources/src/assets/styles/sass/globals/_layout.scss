@@ -44,7 +44,7 @@
       position: relative;
       display: block;
       width: 100%;
-      color: $heading;
+      color: #00fdab !important;
       cursor: pointer;
       border-bottom: 1px solid $gray-300;
       &:focus,
@@ -55,16 +55,16 @@
         text-align: center;
       }
       &.active {
-        color: $primary;
+        color: #00fdab !important;
         .nav-item-hold {
-          color: $primary;
+          color: #00fdab !important;
         }
       }
       .nav-item-hold {
         width: 100%;
         padding: 26px 0;
         display: block;
-        color: $heading;
+        color: #00fdab !important;
         &:focus,
         &:active {
           outline: none;
@@ -83,7 +83,7 @@
           font-weight: 400;
         }
         a {
-          color: $heading;
+          color: #00fdab !important;
         }
       }
       &.active .triangle {
@@ -94,7 +94,7 @@
         bottom: 0;
         border-style: solid;
         border-width: 0 0 30px 30px;
-        border-color: transparent transparent $primary transparent;
+        border-color: transparent transparent #00fdab transparent;
       }
     }
   }
@@ -118,7 +118,7 @@
     li.nav-item {
       display: block;
       a {
-        color: $heading;
+        color: #00fdab !important;
         text-transform: capitalize;
         display: flex;
         align-items: center;
@@ -130,7 +130,7 @@
           background: $gray-200;
         }
         &.open {
-          color: $primary;
+          color: #00fdab !important;
         }
         .nav-icon {
           font-size: 18px;

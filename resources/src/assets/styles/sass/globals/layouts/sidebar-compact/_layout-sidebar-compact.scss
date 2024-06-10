@@ -1,6 +1,11 @@
 @import "vars";
 @import "header.scss";
 
+.sidebar-custom{
+  background-color: #050a08;
+}
+
+
 //SIDEBAR =======
 .layout-sidebar-compact {
   &.app-admin-wrap {
@@ -24,7 +29,7 @@
     padding: 0 2rem;
     position: relative;
     min-height: calc(100vh - #{$topbar-height});
-    background: $white;
+    background-color: black !important;
   }
   .main-content {
     margin-top: 104px;
@@ -66,7 +71,7 @@
         position: relative;
         display: block;
         width: 100%;
-        color: $white;
+        color: black;
         cursor: pointer;
         border-bottom: 1px solid rgba($gray-100, 0.05);
         &:focus,
@@ -84,7 +89,7 @@
           width: 100%;
           padding: 22px 0;
           display: block;
-          color: #ffffff;
+          color: #bd0101;
           &:focus,
           &:active {
             outline: none;

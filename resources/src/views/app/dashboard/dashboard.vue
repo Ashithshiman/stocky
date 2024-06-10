@@ -1,5 +1,6 @@
 <template>
   <!-- ============ Body content start ============= -->
+   
   <div class="main-content">
     <div v-if="loading" class="loading_page spinner spinner-primary mr-3"></div>
     <div v-else-if="!loading && currentUserPermissions && currentUserPermissions.includes('dashboard')">
@@ -17,67 +18,6 @@
           </b-form-group>
         </b-col>
       </b-row>
-
-      <!-- <b-row> 
-        ICON BG 
-
-        <b-col lg="3" md="6" sm="12">
-          <router-link tag="a" class to="/app/sales/list">
-            <b-card class="card-icon-bg card-icon-bg-primary o-hidden mb-30 text-center">
-              <i class="i-Full-Cart"></i>
-              <div class="content">
-                <p class="text-muted mt-2 mb-0">{{$t('Sales')}}</p>
-                <p
-                  class="text-primary text-24 line-height-1 mb-2"
-                >{{currentUser.currency}} {{report_today.today_sales?report_today.today_sales:0}}</p>
-              </div>
-            </b-card>
-          </router-link>
-        </b-col>
-
-        <b-col lg="3" md="6" sm="12">
-          <router-link tag="a" class to="/app/purchases/list">
-            <b-card class="card-icon-bg card-icon-bg-primary o-hidden mb-30 text-center">
-              <i class="i-Add-Cart"></i>
-              <div class="content">
-                <p class="text-muted mt-2 mb-0">{{$t('Purchases')}}</p>
-                <p
-                  class="text-primary text-24 line-height-1 mb-2"
-                >{{currentUser.currency}} {{report_today.today_purchases?report_today.today_purchases:0}}</p>
-              </div>
-            </b-card>
-          </router-link>
-        </b-col>
-
-        <b-col lg="3" md="6" sm="12">
-          <router-link tag="a" class to="/app/sale_return/list">
-            <b-card class="card-icon-bg card-icon-bg-primary o-hidden mb-30 text-center">
-              <i class="i-Right-4"></i>
-              <div class="content">
-                <p class="text-muted mt-2 mb-0">{{$t('SalesReturn')}}</p>
-                <p
-                  class="text-primary text-24 line-height-1 mb-2"
-                >{{currentUser.currency}} {{report_today.return_sales?report_today.return_sales:0}}</p>
-              </div>
-            </b-card>
-          </router-link>
-        </b-col>
-
-        <b-col lg="3" md="6" sm="12">
-          <router-link tag="a" class to="/app/purchase_return/list">
-            <b-card class="card-icon-bg card-icon-bg-primary o-hidden mb-30 text-center">
-              <i class="i-Left-4"></i>
-              <div class="content">
-                <p class="text-muted mt-2 mb-0">{{$t('PurchasesReturn')}}</p>
-                <p
-                  class="text-primary text-24 line-height-1 mb-2"
-                >{{currentUser.currency}} {{report_today.return_purchases?report_today.return_purchases:0}}</p>
-              </div>
-            </b-card>
-          </router-link>
-        </b-col>
-
-      </b-row> -->
       <b-row>
       <b-col lg="12" md="12" sm="12">
         <b-card class="card-combined mb-30 text-center">
@@ -208,15 +148,15 @@
 
       <b-row>
         <b-col lg="8" md="12" sm="12">
-          <b-card class="mb-30">
+          <b-card class="card-combined mb-30">
             <h4 class="card-title m-0">{{$t('Payment_Sent_Received')}}</h4>
-            <div class="chart-wrapper">
+            <div class=" chart-wrapper">
               <v-chart :options="echartPayment" :autoresize="true"></v-chart>
             </div>
           </b-card>
         </b-col>
         <b-col col lg="4" md="12" sm="12">
-          <b-card class="mb-30">
+          <b-card class="card-combined mb-30">
             <h4 class="card-title m-0">{{$t('TopCustomers')}} ({{CurrentMonth}})</h4>
             <div class="chart-wrapper">
               <v-chart :options="echartCustomer" :autoresize="true"></v-chart>
@@ -228,8 +168,8 @@
       <!-- Last Sales -->
       <b-row>
         <div class="col-md-12">
-          <div class="card mb-30">
-            <div class=" card-combined card-body p-0">
+          <div class="card card-combined mb-30">
+            <div class="  card-body p-0">
               <h5 class="card-title border-bottom p-3 mb-2">{{$t('Recent_Sales')}}</h5>
 
               <vue-good-table
@@ -509,47 +449,123 @@ export default {
               }
             ]
           };
+          // this.echartPayment = {
+          //   tooltip: {
+          //     trigger: "axis"
+          //   },
+          //   legend: {
+          //     data: ["Payment sent", "Payment received"]
+          //   },
+          //   grid: {
+          //     left: "3%",
+          //     right: "4%",
+          //     bottom: "3%",
+          //     containLabel: true
+          //   },
+          //   toolbox: {
+          //     feature: {
+          //       saveAsImage: {}
+          //     }
+          //   },
+          //   xAxis: {
+          //     type: "category",
+          //     boundaryGap: false,
+          //     data: responseData.payments.original.days
+          //   },
+          //   yAxis: {
+          //     type: "value"
+          //   },
+          //   series: [
+          //     {
+          //       name: "Payment sent",
+          //       type: "line",
+          //       data: responseData.payments.original.payment_sent
+          //     },
+          //     {
+          //       name: "Payment received",
+          //       type: "line",
+          //       data: responseData.payments.original.payment_received
+          //     }
+          //   ]
+          // };
+
           this.echartPayment = {
-            tooltip: {
-              trigger: "axis"
-            },
-            legend: {
-              data: ["Payment sent", "Payment received"]
-            },
-            grid: {
-              left: "3%",
-              right: "4%",
-              bottom: "3%",
-              containLabel: true
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: responseData.payments.original.days
-            },
-            yAxis: {
-              type: "value"
-            },
-            series: [
-              {
-                name: "Payment sent",
-                type: "line",
-                data: responseData.payments.original.payment_sent
-              },
-              {
-                name: "Payment received",
-                type: "line",
-                data: responseData.payments.original.payment_received
-              }
-            ]
-          };
+  tooltip: {
+    trigger: "axis"
+  },
+  legend: {
+    data: ["Payment sent", "Payment received"]
+  },
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: "category",
+    boundaryGap: false,
+    data: responseData.payments.original.days,
+    axisLine: {
+      lineStyle: {
+        color: '#00ff00' // Change this to your desired color for the x-axis line
+      }
+    },
+    axisLabel: {
+      textStyle: {
+        color: '#00ff00' // Change this to your desired color for x-axis labels
+      }
+    }
+  },
+  yAxis: {
+    type: "value",
+    axisLine: {
+      lineStyle: {
+        color: '#00ff00' // Change this to your desired color for the y-axis line
+      }
+    },
+    axisLabel: {
+      textStyle: {
+        color: '#00ff00' // Change this to your desired color for y-axis labels
+      }
+    }
+  },
+  series: [
+    {
+      name: "Payment sent",
+      type: "line",
+      data: responseData.payments.original.payment_sent,
+      lineStyle: {
+        color: 'blue' // Change this to your desired color for the "Payment sent" line
+      },
+      itemStyle: {
+        color: 'blue' // Change this to your desired color for the points on the "Payment sent" line
+      }
+    },
+    {
+      name: "Payment received",
+      type: "line",
+      data: responseData.payments.original.payment_received,
+      lineStyle: {
+        color: 'red' // Change this to your desired color for the "Payment received" line
+      },
+      itemStyle: {
+        color: 'red' // Change this to your desired color for the points on the "Payment received" line
+      }
+    }
+  ],
+  textStyle: {
+    color: 'blue' // Change this to your desired general text color in the chart
+  }
+};
           this.echartProduct = {
-            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
+            // color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
+            color: ["#042419", "#05100c", "#033222", "#05100c", "#042419"],
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)"
