@@ -186,7 +186,7 @@
                         </div>
                     </b-card>
                 </b-col>
-                <b-col col lg="4" md="12" sm="12">
+                <!-- <b-col col lg="4" md="12" sm="12">
                     <b-card class="mb-30">
                         <h4 class="card-title m-0">
                             {{ $t("Top_Selling_Products") }} ({{
@@ -210,7 +210,20 @@
                             ></v-chart>
                         </div>
                     </b-card>
-                </b-col>
+                </b-col> -->
+
+                <b-col col lg="4" md="12" sm="12">
+          <b-card class="mb-30 card-combined">
+            <h4 class="card-title m-0">{{$t('Top_Selling_Products')}} ({{new Date().getFullYear()}})</h4>
+            <div class="chart-wrapper">
+              <div v-once class="typo__p text-right" v-if="loading">
+                <div class="spinner sm spinner-primary mt-3"></div>
+              </div>
+              <v-chart v-if="!loading" :options="echartProduct" :autoresize="true"></v-chart>
+            </div>
+          </b-card>
+        </b-col>
+
             </b-row>
 
             <b-row>
@@ -603,21 +616,10 @@ export default {
                 name: "Top Customers",
                 type: "pie",
                 radius: "50%",
-                center: ["50%", "50%"],
+                center: "50%",
+
                 data: responseData.customers.original,
                 itemStyle: {
-                  normal: {
-                    label: {
-                      textStyle: {
-                        color: '#00fdab' // Pie chart labels color
-                      }
-                    },
-                    labelLine: {
-                      lineStyle: {
-                        color: '#00fdab' // Lines connecting labels to slices
-                      }
-                    }
-                  },
                   emphasis: {
                     shadowBlur: 10,
                     shadowOffsetX: 0,
@@ -627,6 +629,7 @@ export default {
               }
             ]
           };
+
 
           this.echartPayment = {
   tooltip: {
@@ -712,23 +715,23 @@ export default {
             formatter: function(params) {
               return `${params.name}: (${params.value}sales)`;
             },
-            series: [
-              {
-                name: "Top Selling Products",
-                type: "pie",
-                radius: "50%",
-                center: "50%",
+          //   series: [
+          //     {
+          //       name: "Top Selling Products",
+          //       type: "pie",
+          //       radius: "50%",
+          //       center: "50%",
 
-                data: responseData.product_report.original,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: "rgba(0, 0, 0, 0.5)"
-                  }
-                }
-              }
-            ]
+          //       data: responseData.product_report.original,
+          //       itemStyle: {
+          //         emphasis: {
+          //           shadowBlur: 10,
+          //           shadowOffsetX: 0,
+          //           shadowColor: "rgba(0, 0, 0, 0.5)"
+          //         }
+          //       }
+          //     }
+          //   ]
           };
           this.echartSales = {
             legend: {
