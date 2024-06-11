@@ -103,6 +103,10 @@
     .badge {
       border: $border-width solid #000;
     }
+    .badge:hover{
+      background-color: #00fdab !important;
+      color: white;
+    }
 
     .table {
       border-collapse: collapse !important;

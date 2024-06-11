@@ -1,4 +1,23 @@
 // stylelint-disable selector-no-qualifying-type
+/* Apply styles to the router-link directly */
+.custom-pos-button {
+  border-color: #00fdab !important; /* Change the border color */
+  color: #00fdab !important;       /* Change the text color */
+}
+
+.custom-pos-button .ul-btn__text {
+  color: #00fdab !important; /* Change the span text color */
+}
+
+.custom-pos-button:hover {
+  background-color: #00fdab;       /* Optional: Change background color on hover */
+  color: #050a08 !important;       /* Optional: Change text color on hover */
+  border-color: #00fdab !important;/* Ensure border color remains the same on hover */
+}
+
+.custom-pos-button:hover .ul-btn__text {
+  color: #050a08 !important; /* Change the span text color on hover */
+}
 
 // Make the div behave like a button
 .btn-group,

@@ -5,7 +5,7 @@
     <div v-if="loading" class="loading_page spinner spinner-primary mr-3"></div>
     <div v-else-if="!loading && currentUserPermissions && currentUserPermissions.includes('dashboard')">
       <!-- warehouse -->
-      <b-row>
+      <b-row class="dropdown-warehouse">
         <b-col lg="4" md="4" sm="12">
           <b-form-group :label="$t('Filter_by_warehouse')">
             <v-select
@@ -665,7 +665,7 @@ export default {
                 data: responseData.sales.original.data,
                 label: { show: false, color: "#8B5CF6" },
                 type: "bar",
-                color: "#A78BFA",
+                color: "#00fdab",
                 smooth: true,
                 itemStyle: {
                   emphasis: {
@@ -683,7 +683,7 @@ export default {
                 label: { show: false, color: "#0168c1" },
                 type: "bar",
                 barGap: 0,
-                color: "#DDD6FE",
+                color: "#009766",
                 smooth: true,
                 itemStyle: {
                   emphasis: {

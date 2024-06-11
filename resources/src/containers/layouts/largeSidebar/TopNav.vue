@@ -15,13 +15,20 @@
     <div style="margin: auto"></div>
 
     <div class="header-part-right">
-      <router-link 
+      <!-- <router-link 
         v-if="currentUserPermissions && currentUserPermissions.includes('Pos_view')"
         class="btn btn-outline-primary tn-sm btn-rounded"
         to="/app/pos"
       >
-      <span class="ul-btn__text ml-1">POS</span>
-      </router-link>
+      <span class="ul-btn__text ml-1" >POS</span>
+      </router-link> -->
+      <router-link 
+    v-if="currentUserPermissions && currentUserPermissions.includes('Pos_view')"
+    class="btn btn-outline-primary tn-sm btn-rounded custom-pos-button " style="border-color: #00fdab !important; color: #00fdab !important; "
+    to="/app/pos"
+>
+    <span class="ul-btn__text ml-1">POS</span>
+</router-link>
       <!-- Full screen toggle -->
       <i class="i-Full-Screen header-icon d-none d-sm-inline-block" @click="handleFullScreen"></i>
       <!-- Grid menu Dropdown -->
@@ -150,7 +157,7 @@
           variant="link"
         >
           <template slot="button-content" >
-            <span class="badge badge-primary" v-if="notifs_alert > 0">1</span>
+            <span class="badge" style="background-color: #00fdab !important; color: black;" v-if="notifs_alert > 0">1</span>
             <i class="i-Bell text-muted header-icon"></i>
           </template>
           <!-- Notification dropdown -->

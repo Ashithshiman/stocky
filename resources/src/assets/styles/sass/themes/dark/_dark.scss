@@ -223,7 +223,7 @@
   }
 
   .header-icon:hover {
-    background: $dark-forground !important;
+    background: #00fdab !important;
   }
 
   // calender
@@ -421,7 +421,7 @@
   .main-header {
     .show {
       .header-icon {
-        background: $dark-forground;
+        background: #00fdab !important;
       }
     }
     .notification-dropdown {

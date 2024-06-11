@@ -21,11 +21,11 @@
 // begin::badge-pill
 @each $name, $value in $theme-colors {
     .ul-badge-pill-#{$name} {
-        background: $value;
+       background-color:  #00fdab !important;
         border-radius: 50%;
         width: 25px;
         height: 18px;
-        color: #fff;
+        color: #00fdab !important;
         line-height: 20px;
         font-size: 0.8rem;
     }
