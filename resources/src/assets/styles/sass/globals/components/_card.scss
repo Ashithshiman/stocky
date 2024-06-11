@@ -219,10 +219,28 @@ content: '';
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     
   }
-
-  .dropdown-warehouse{
-    background-color: green;
-  color: black;
+// warehouse
+  .custom-dropdown {
+    background: linear-gradient(70deg, #05100c, #042419, #05100c) !important;
+    /* Match the background color */
+    color: #00fdab !important; /* Set the text color to black */
+  }
+  
+  .custom-dropdown .vs__dropdown-menu,
+  .custom-dropdown .vs__selected-options,
+  .custom-dropdown .vs__search {
+    background-color: #042419 !important; /* Match the background color */
+    color: rgb(255, 255, 255) !important; /* Set the text color to black */
+  }
+  
+  .custom-dropdown .vs__dropdown-option {
+    background-color: #042419 !important; /* Match the background color */
+    color: black !important; /* Set the text color to black */
+  }
+  
+  .custom-dropdown .vs__dropdown-option--highlight {
+    background-color: #00fdab !important; /* Highlight color for selected option */
+    color: black !important; /* Text color for selected option */
   }
   
   .card-combined .inner-card {
