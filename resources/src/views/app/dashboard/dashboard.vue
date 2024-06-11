@@ -705,16 +705,16 @@ export default {
     color: 'blue' // Change this to your desired general text color in the chart
   }
 };
-          this.echartProduct = {
+          // this.echartProduct = {
             // color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
-            color: ["#042419", "#05100c", "#033222", "#05100c", "#042419"],
-            tooltip: {
-              show: true,
-              backgroundColor: "rgba(0, 0, 0, .8)"
-            },
-            formatter: function(params) {
-              return `${params.name}: (${params.value}sales)`;
-            },
+            // color: ["#042419", "#05100c", "#033222", "#05100c", "#042419"],
+            // tooltip: {
+            //   show: true,
+            //   backgroundColor: "rgba(0, 0, 0, .8)"
+            // },
+            // formatter: function(params) {
+            //   return `${params.name}: (${params.value}sales)`;
+            // },
           //   series: [
           //     {
           //       name: "Top Selling Products",
@@ -732,7 +732,36 @@ export default {
           //       }
           //     }
           //   ]
+          // };
+
+          this.echartProduct = {
+            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
+            tooltip: {
+              show: true,
+              backgroundColor: "rgba(0, 0, 0, .8)"
+            },
+            formatter: function(params) {
+              return `${params.name}: (${params.value}sales)`;
+            },
+            series: [
+              {
+                name: "Top Selling Products",
+                type: "pie",
+                radius: "50%",
+                center: "50%",
+
+                data: responseData.product_report.original,
+                itemStyle: {
+                  emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: "rgba(0, 0, 0, 0.5)"
+                  }
+                }
+              }
+            ]
           };
+          
           this.echartSales = {
             legend: {
               borderRadius: 0,
