@@ -27,7 +27,8 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="tableOne vgt-table"
+        styleClass="custom-product tableOne vgt-table" 
+
       >
         <div slot="selected-row-actions">
           <button class="btn btn-danger" @click="delete_by_selected()">{{$t('Del')}}</button>

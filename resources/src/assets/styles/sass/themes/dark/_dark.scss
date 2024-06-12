@@ -274,6 +274,8 @@
   table.vgt-table td {
     border-bottom: 1px solid $dark-forground;
     color: $dark-heading;
+    background-color: #00fdab;
+    // background: linear-gradient(70deg, #193d2f, #1e613c, #143327) !important;
   }
   table.tableOne tbody tr th.vgt-checkbox-col {
     background: $dark-bg;

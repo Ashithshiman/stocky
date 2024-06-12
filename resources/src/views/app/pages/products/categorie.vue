@@ -3,7 +3,7 @@
     <breadcumb :page="$t('Categories')" :folder="$t('Products')"/>
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
-    <b-card class="wrapper" v-if="!isLoading">
+    <b-card class="wrapper" v-if="!isLoading" >
       <vue-good-table
         mode="remote"
         :columns="columns"
@@ -28,7 +28,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="table-hover tableOne vgt-table"
+        styleClass="custom-product table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>

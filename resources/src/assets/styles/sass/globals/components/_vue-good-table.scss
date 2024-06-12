@@ -1,11 +1,17 @@
+table.vgt-table td {
+color: white !important;
+
+}
+
 table.tableOne.vgt-table thead tr th {
-  background: #fff;
+  color: white;
+  background: #55a446
 }
 table.tableOne.vgt-table {
   font-size: 13px;
 }
 .vgt-global-search.vgt-clearfix {
-  background: #fff;
+  background: #000000;
 }
 .vgt-table.full-height{
   min-height : 390px!important;
@@ -69,7 +75,7 @@ table.tableOne tbody tr th.line-numbers {
   background: #fff;
 }
 table.tableOne tbody tr th.vgt-checkbox-col {
-  background: #fff;
+  background: #55a446;
 }
 .vgt-wrap__footer .footer__navigation>button:first-of-type {
   margin-right: 0;

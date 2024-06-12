@@ -5,10 +5,11 @@
 
     <validation-observer ref="Create_Product" v-if="!isLoading">
       <b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">
-        <b-row>
-          <b-col md="8" class="mb-2">
-            <b-card class="mt-3">
-              <b-row>
+        <b-row >
+          <b-col md="8" class="mb-2" >
+            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
+">
+              <b-row >
                 <!-- Name -->
                 <b-col md="6" class="mb-2">
                   <validation-provider
@@ -30,7 +31,7 @@
                 </b-col>
 
                 <!-- Barcode Symbology  -->
-                <b-col md="6" class="mb-2">
+                <b-col md="6" class="mb-2" >
                   <validation-provider name="Barcode Symbology" :rules="{ required: true}">
                     <b-form-group
                       slot-scope="{ valid, errors }"
@@ -187,10 +188,11 @@
               </b-row>
             </b-card>
 
-            <b-card class="mt-3">
-              <b-row>
+            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
+" >
+              <b-row >
                 <!-- Type  -->
-                <b-col md="6" class="mb-2">
+                <b-col md="6" class="mb-2" >
                   <validation-provider name="Type" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('type') + ' ' + '*'">
                       <v-select
@@ -356,7 +358,7 @@
                       class="form-control"
                     >
                     <a
-                      style="color: #ffff;margin-left: 10px;"
+                      style="color:#00fdab ;margin-left: 10px;"
                       @click="add_variant(tag)"
                       class="ms-3 btn btn-md btn-primary"
                     >{{$t('Add')}}</a>
@@ -410,7 +412,8 @@
               </b-row>
             </b-card>
            
-            <b-card class="mt-3">
+            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
+">
               <b-row>
                 <!-- Product_Has_Imei_Serial_number -->
                 <b-col md="12 mb-2">
@@ -418,7 +421,7 @@
                     <div class="form-check">
                       <label class="checkbox checkbox-outline-primary">
                         <input type="checkbox" v-model="product.is_imei">
-                        <h5>{{$t('Product_Has_Imei_Serial_number')}}</h5>
+                        <h5 style="color: white;">{{$t('Product_Has_Imei_Serial_number')}}</h5>
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -431,7 +434,7 @@
                     <div class="form-check">
                       <label class="checkbox checkbox-outline-primary">
                         <input type="checkbox" v-model="product.not_selling">
-                        <h5>{{$t('This_Product_Not_For_Selling')}}</h5>
+                        <h5  style="color: white;">{{$t('This_Product_Not_For_Selling')}}</h5>
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -441,11 +444,12 @@
             </b-card>
           </b-col>
 
-          <b-col md="4">
+          <b-col md="4" >
             <!-- upload-multiple-image -->
-            <b-card>
+            <b-card style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
+">
               <div class="card-header">
-                <h5>{{$t('MultipleImage')}}</h5>
+                <h5  style="color: white;">{{$t('MultipleImage')}}</h5>
               </div>
               <div class="card-body">
                 <b-row class="form-group">

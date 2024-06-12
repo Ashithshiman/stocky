@@ -36,6 +36,12 @@
   // as much space as possible, ensuring footers are aligned to the bottom.
   flex: 1 1 auto;
   padding: $card-spacer-x;
+
+  color: white;
+
+
+
+
 }
 
 .card-title {
@@ -47,7 +53,8 @@
   margin-bottom: 0;
 }
 
-.card-text:last-child {
+.card-text:last-c
+ild {
   margin-bottom: 0;
 }
 
