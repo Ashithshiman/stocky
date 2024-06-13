@@ -165,7 +165,10 @@
             <b-row>
                 <b-col lg="8" md="12" sm="12">
                     <b-card class="mb-30 card-combined">
-                        <h4 class="card-title m-0">
+                        <h4
+                            class="card-title m-0"
+                            style="padding: 15px 0px 0px 16px"
+                        >
                             {{ $t("This_Week_Sales_Purchases") }}
                         </h4>
                         <div class="chart-wrapper">
@@ -213,24 +216,40 @@
                 </b-col> -->
 
                 <b-col col lg="4" md="12" sm="12">
-          <b-card class="mb-30 card-combined">
-            <h4 class="card-title m-0">{{$t('Top_Selling_Products')}} ({{new Date().getFullYear()}})</h4>
-            <div class="chart-wrapper">
-              <div v-once class="typo__p text-right" v-if="loading">
-                <div class="spinner sm spinner-primary mt-3"></div>
-              </div>
-              <v-chart v-if="!loading" :options="echartProduct" :autoresize="true"></v-chart>
-            </div>
-          </b-card>
-        </b-col>
-
+                    <b-card class="mb-30 card-combined">
+                        <h4
+                            class="card-title m-0"
+                            style="padding: 15px 0px 0px 16px"
+                        >
+                            {{ $t("Top_Selling_Products") }} ({{
+                                new Date().getFullYear()
+                            }})
+                        </h4>
+                        <div class="chart-wrapper">
+                            <div
+                                v-once
+                                class="typo__p text-right"
+                                v-if="loading"
+                            >
+                                <div
+                                    class="spinner sm spinner-primary mt-3"
+                                ></div>
+                            </div>
+                            <v-chart
+                                v-if="!loading"
+                                :options="echartProduct"
+                                :autoresize="true"
+                            ></v-chart>
+                        </div>
+                    </b-card>
+                </b-col>
             </b-row>
 
             <b-row>
                 <!-- Stock Alert -->
                 <div class="col-md-8">
                     <div class="card-combined card mb-30">
-                        <div class="card-combined card-body p-2">
+                        <div class="card-combined p-2">
                             <h5 class="card-title border-bottom p-3 mb-2">
                                 {{ $t("StockAlert") }}
                             </h5>
@@ -260,7 +279,7 @@
 
                 <div class="col-md-4">
                     <div class="card mb-30">
-                        <div class="card-combined card-body p-3">
+                        <div class="card-combined p-3">
                             <h5 class="card-title border-bottom p-3 mb-2">
                                 {{ $t("Top_Selling_Products") }} ({{
                                     CurrentMonth
@@ -292,7 +311,10 @@
             <b-row>
                 <b-col lg="8" md="12" sm="12">
                     <b-card class="card-combined mb-30">
-                        <h4 class="card-title m-0">
+                        <h4
+                            class="card-title m-0"
+                            style="padding: 15px 0px 0px 16px"
+                        >
                             {{ $t("Payment_Sent_Received") }}
                         </h4>
                         <div class="chart-wrapper">
@@ -305,7 +327,7 @@
                 </b-col>
                 <b-col col lg="4" md="12" sm="12">
                     <b-card class="card-combined mb-30">
-                        <h4 class="card-title m-0">
+                        <h4 class="card-title m-0" style=" padding: 15px 0px 0px 16px">
                             {{ $t("TopCustomers") }} ({{ CurrentMonth }})
                         </h4>
                         <div class="chart-wrapper">
@@ -322,7 +344,7 @@
             <b-row>
                 <div class="col-md-12">
                     <div class="card card-combined mb-30">
-                        <div class="card-body p-0">
+                        <div class="p-0">
                             <h5 class="card-title border-bottom p-3 mb-2">
                                 {{ $t("Recent_Sales") }}
                             </h5>
@@ -413,502 +435,514 @@ import "echarts/lib/component/tooltip";
 import "echarts/lib/component/legend";
 
 export default {
-  components: {
-    "v-chart": ECharts
-  },
-  metaInfo: {
-    // if no subcomponents specify a metaInfo.title, this title will be used
-    title: "Dashboard"
-  },
-  data() {
-    return {
-      sales: [],
-      warehouses: [],
-      warehouse_id: "",
-      stock_alerts: [],
-      report_today: {
-        revenue: 0,
-        today_purchases: 0,
-        today_sales: 0,
-        return_sales: 0,
-        return_purchases: 0
-      },
-      products: [],
-      CurrentMonth: "",
-      loading: true,
-      echartSales: {},
-      echartProduct: {},
-      echartCustomer: {},
-      echartPayment: {}
-    };
-  },
-  computed: {
-    ...mapGetters(["currentUserPermissions", "currentUser"]),
-    columns_sales() {
-      return [
-        {
-          label: this.$t("Reference"),
-          field: "Ref",
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("Customer"),
-          field: "client_name",
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("warehouse"),
-          field: "warehouse_name",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-        {
-          label: this.$t("Status"),
-          field: "statut",
-          html: true,
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("Total"),
-          field: "GrandTotal",
-          type: "decimal",
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("Paid"),
-          field: "paid_amount",
-          type: "decimal",
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("Due"),
-          field: "due",
-          type: "decimal",
-          tdClass: "gull-border-none text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("PaymentStatus"),
-          field: "payment_status",
-          html: true,
-          sortable: false,
-          tdClass: "text-left gull-border-none",
-          thClass: "text-left"
-        }
-      ];
+    components: {
+        "v-chart": ECharts,
     },
-    columns_stock() {
-      return [
-        {
-          label: this.$t("ProductCode"),
-          field: "code",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("ProductName"),
-          field: "name",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("warehouse"),
-          field: "warehouse",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("Quantity"),
-          field: "quantity",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("AlertQuantity"),
-          field: "stock_alert",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        }
-      ];
+    metaInfo: {
+        // if no subcomponents specify a metaInfo.title, this title will be used
+        title: "Dashboard",
     },
-    columns_products() {
-      return [
-        {
-          label: this.$t("ProductName"),
-          field: "name",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("TotalSales"),
-          field: "total_sales",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        },
-        {
-          label: this.$t("TotalAmount"),
-          field: "total",
-          tdClass: "text-left",
-          thClass: "text-left",
-          sortable: false
-        }
-      ];
-    }
-  },
-  methods: {
-
-    //---------------------- Event Select Warehouse ------------------------------\\
-    Selected_Warehouse(value) {
-      if (value === null) {
-        this.warehouse_id = "";
-      }
-      this.all_dashboard_data();
+    data() {
+        return {
+            sales: [],
+            warehouses: [],
+            warehouse_id: "",
+            stock_alerts: [],
+            report_today: {
+                revenue: 0,
+                today_purchases: 0,
+                today_sales: 0,
+                return_sales: 0,
+                return_purchases: 0,
+            },
+            products: [],
+            CurrentMonth: "",
+            loading: true,
+            echartSales: {},
+            echartProduct: {},
+            echartCustomer: {},
+            echartPayment: {},
+        };
     },
-
-    //---------------------------------- Report Dashboard With Echart
-    all_dashboard_data() {
-      axios
-        .get(
-          "/dashboard_data?warehouse_id=" + this.warehouse_id)
-        .then(response => {
-          const responseData = response.data;
-
-          this.report_today = response.data.report_dashboard.original.report;
-          this.warehouses = response.data.warehouses;
-          this.stock_alerts =
-            response.data.report_dashboard.original.stock_alert;
-          this.products = response.data.report_dashboard.original.products;
-          this.sales = response.data.report_dashboard.original.last_sales;
-          var dark_heading = "#c2c6dc";
-
-          this.echartCustomer = {
-            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
-            tooltip: {
-              show: true,
-              backgroundColor: "#fff"
-            },
-
-            formatter: function (params) {
-              return `${params.name}: (${params.data.value} sales) (${params.percent
-                }%)`;
-            },
-
-            series: [
-              {
-                name: "Top Customers",
-                type: "pie",
-                radius: "50%",
-                center: "50%",
-
-                data: responseData.customers.original,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: "rgba(0, 0, 0, 0.5)"
-                  }
-                }
-              }
-            ]
-          };
-
-
-          this.echartPayment = {
-  tooltip: {
-    trigger: "axis"
-  },
-  legend: {
-    data: ["Payment sent", "Payment received"]
-  },
-  grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
-    containLabel: true
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {}
-    }
-  },
-  xAxis: {
-    type: "category",
-    boundaryGap: false,
-    data: responseData.payments.original.days,
-    axisLine: {
-      lineStyle: {
-        color: '#00ff00' // Change this to your desired color for the x-axis line
-      }
-    },
-    axisLabel: {
-      textStyle: {
-        color: '#00ff00' // Change this to your desired color for x-axis labels
-      }
-    }
-  },
-  yAxis: {
-    type: "value",
-    axisLine: {
-      lineStyle: {
-        color: '#00ff00' // Change this to your desired color for the y-axis line
-      }
-    },
-    axisLabel: {
-      textStyle: {
-        color: '#00ff00' // Change this to your desired color for y-axis labels
-      }
-    }
-  },
-  series: [
-    {
-      name: "Payment sent",
-      type: "line",
-      data: responseData.payments.original.payment_sent,
-      lineStyle: {
-        color: 'blue' // Change this to your desired color for the "Payment sent" line
-      },
-      itemStyle: {
-        color: 'blue' // Change this to your desired color for the points on the "Payment sent" line
-      }
-    },
-    {
-      name: "Payment received",
-      type: "line",
-      data: responseData.payments.original.payment_received,
-      lineStyle: {
-        color: 'red' // Change this to your desired color for the "Payment received" line
-      },
-      itemStyle: {
-        color: 'red' // Change this to your desired color for the points on the "Payment received" line
-      }
-    }
-  ],
-  textStyle: {
-    color: 'blue' // Change this to your desired general text color in the chart
-  }
-};
-          // this.echartProduct = {
-            // color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
-            // color: ["#042419", "#05100c", "#033222", "#05100c", "#042419"],
-            // tooltip: {
-            //   show: true,
-            //   backgroundColor: "rgba(0, 0, 0, .8)"
-            // },
-            // formatter: function(params) {
-            //   return `${params.name}: (${params.value}sales)`;
-            // },
-          //   series: [
-          //     {
-          //       name: "Top Selling Products",
-          //       type: "pie",
-          //       radius: "50%",
-          //       center: "50%",
-
-          //       data: responseData.product_report.original,
-          //       itemStyle: {
-          //         emphasis: {
-          //           shadowBlur: 10,
-          //           shadowOffsetX: 0,
-          //           shadowColor: "rgba(0, 0, 0, 0.5)"
-          //         }
-          //       }
-          //     }
-          //   ]
-          // };
-
-          this.echartProduct = {
-            color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
-            tooltip: {
-              show: true,
-              backgroundColor: "rgba(0, 0, 0, .8)"
-            },
-            formatter: function(params) {
-              return `${params.name}: (${params.value}sales)`;
-            },
-            series: [
-              {
-                name: "Top Selling Products",
-                type: "pie",
-                radius: "50%",
-                center: "50%",
-
-                data: responseData.product_report.original,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: "rgba(0, 0, 0, 0.5)"
-                  }
-                }
-              }
-            ]
-          };
-          
-          this.echartSales = {
-            legend: {
-              borderRadius: 0,
-              orient: "horizontal",
-              x: "right",
-              data: ["Sales", "Purchases"]
-            },
-            grid: {
-              left: "8px",
-              right: "8px",
-              bottom: "0",
-              containLabel: true
-            },
-            tooltip: {
-              show: true,
-
-              backgroundColor: "rgba(0, 0, 0, .8)"
-            },
-
-            xAxis: [
-              {
-                type: "category",
-                data: responseData.sales.original.days,
-                axisTick: {
-                  alignWithLabel: true
+    computed: {
+        ...mapGetters(["currentUserPermissions", "currentUser"]),
+        columns_sales() {
+            return [
+                {
+                    label: this.$t("Reference"),
+                    field: "Ref",
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
                 },
-                splitLine: {
-                  show: false
+                {
+                    label: this.$t("Customer"),
+                    field: "client_name",
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
                 },
-                axisLabel: {
-                  color: dark_heading,
-                  interval: 0,
-                  rotate: 30
+                {
+                    label: this.$t("warehouse"),
+                    field: "warehouse_name",
+                    tdClass: "text-left",
+                    thClass: "text-left",
                 },
-                axisLine: {
-                  show: true,
-                  color: dark_heading,
-
-                  lineStyle: {
-                    color: dark_heading
-                  }
-                }
-              }
-            ],
-            yAxis: [
-              {
-                type: "value",
-
-                axisLabel: {
-                  color: dark_heading
-                  // formatter: "${value}"
+                {
+                    label: this.$t("Status"),
+                    field: "statut",
+                    html: true,
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
                 },
-                axisLine: {
-                  show: false,
-                  color: dark_heading,
-
-                  lineStyle: {
-                    color: dark_heading
-                  }
+                {
+                    label: this.$t("Total"),
+                    field: "GrandTotal",
+                    type: "decimal",
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
                 },
-                min: 0,
-                splitLine: {
-                  show: true,
-                  interval: "auto"
-                }
-              }
-            ],
-
-            series: [
-              {
-                name: "Sales",
-                data: responseData.sales.original.data,
-                label: { show: false, color: "#8B5CF6" },
-                type: "bar",
-                color: "#00fdab",
-                smooth: true,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: -2,
-                    shadowColor: "rgba(0, 0, 0, 0.3)"
-                  }
-                }
-              },
-              {
-                name: "Purchases",
-                data: responseData.purchases.original.data,
-
-                label: { show: false, color: "#0168c1" },
-                type: "bar",
-                barGap: 0,
-                color: "#009766",
-                smooth: true,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: -2,
-                    shadowColor: "rgba(0, 0, 0, 0.3)"
-                  }
-                }
-              }
-            ]
-          };
-          this.loading = false;
-        })
-        .catch(response => {});
+                {
+                    label: this.$t("Paid"),
+                    field: "paid_amount",
+                    type: "decimal",
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("Due"),
+                    field: "due",
+                    type: "decimal",
+                    tdClass: "gull-border-none text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("PaymentStatus"),
+                    field: "payment_status",
+                    html: true,
+                    sortable: false,
+                    tdClass: "text-left gull-border-none",
+                    thClass: "text-left",
+                },
+            ];
+        },
+        columns_stock() {
+            return [
+                {
+                    label: this.$t("ProductCode"),
+                    field: "code",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("ProductName"),
+                    field: "name",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("warehouse"),
+                    field: "warehouse",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("Quantity"),
+                    field: "quantity",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("AlertQuantity"),
+                    field: "stock_alert",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+            ];
+        },
+        columns_products() {
+            return [
+                {
+                    label: this.$t("ProductName"),
+                    field: "name",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("TotalSales"),
+                    field: "total_sales",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+                {
+                    label: this.$t("TotalAmount"),
+                    field: "total",
+                    tdClass: "text-left",
+                    thClass: "text-left",
+                    sortable: false,
+                },
+            ];
+        },
     },
+    methods: {
+        //---------------------- Event Select Warehouse ------------------------------\\
+        Selected_Warehouse(value) {
+            if (value === null) {
+                this.warehouse_id = "";
+            }
+            this.all_dashboard_data();
+        },
 
-    //------------------------------Get Month -------------------------\\
-    GetMonth() {
-      var months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ];
-      var now = new Date();
-      this.CurrentMonth = months[now.getMonth()];
+        //---------------------------------- Report Dashboard With Echart
+        all_dashboard_data() {
+            axios
+                .get("/dashboard_data?warehouse_id=" + this.warehouse_id)
+                .then((response) => {
+                    const responseData = response.data;
+
+                    this.report_today =
+                        response.data.report_dashboard.original.report;
+                    this.warehouses = response.data.warehouses;
+                    this.stock_alerts =
+                        response.data.report_dashboard.original.stock_alert;
+                    this.products =
+                        response.data.report_dashboard.original.products;
+                    this.sales =
+                        response.data.report_dashboard.original.last_sales;
+                    var dark_heading = "#c2c6dc";
+
+                    this.echartCustomer = {
+                        color: [
+                            "#32d629",
+                            "#2db424",
+                            "#A78BFA",
+                            "#28a11f",
+                            "#238e1a",
+                        ],
+                        tooltip: {
+                            show: true,
+                            backgroundColor: "#fff",
+                        },
+
+                        formatter: function (params) {
+                            return `${params.name}: (${params.data.value} sales) (${params.percent}%)`;
+                        },
+
+                        series: [
+                            {
+                                name: "Top Customers",
+                                type: "pie",
+                                radius: "50%",
+                                center: "50%",
+
+                                data: responseData.customers.original,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: "rgba(0, 0, 0, 0.5)",
+                                    },
+                                },
+                            },
+                        ],
+                    };
+
+                    this.echartPayment = {
+                        tooltip: {
+                            trigger: "axis",
+                        },
+                        legend: {
+                            data: ["Payment sent", "Payment received"],
+                        },
+                        grid: {
+                            left: "3%",
+                            right: "4%",
+                            bottom: "3%",
+                            containLabel: true,
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {},
+                            },
+                        },
+                        xAxis: {
+                            type: "category",
+                            boundaryGap: false,
+                            data: responseData.payments.original.days,
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#00ff00", // Change this to your desired color for the x-axis line
+                                },
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#00ff00", // Change this to your desired color for x-axis labels
+                                },
+                            },
+                        },
+                        yAxis: {
+                            type: "value",
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#00ff00", // Change this to your desired color for the y-axis line
+                                },
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: "#00ff00", // Change this to your desired color for y-axis labels
+                                },
+                            },
+                        },
+                        series: [
+                            {
+                                name: "Payment sent",
+                                type: "line",
+                                data: responseData.payments.original
+                                    .payment_sent,
+                                lineStyle: {
+                                    color: "blue", // Change this to your desired color for the "Payment sent" line
+                                },
+                                itemStyle: {
+                                    color: "blue", // Change this to your desired color for the points on the "Payment sent" line
+                                },
+                            },
+                            {
+                                name: "Payment received",
+                                type: "line",
+                                data: responseData.payments.original
+                                    .payment_received,
+                                lineStyle: {
+                                    color: "red", // Change this to your desired color for the "Payment received" line
+                                },
+                                itemStyle: {
+                                    color: "red", // Change this to your desired color for the points on the "Payment received" line
+                                },
+                            },
+                        ],
+                        textStyle: {
+                            color: "blue", // Change this to your desired general text color in the chart
+                        },
+                    };
+                    // this.echartProduct = {
+                    // color: ["#32d629", "#2db424", "#A78BFA", "#28a11f", "#238e1a"],
+                    // color: ["#042419", "#05100c", "#033222", "#05100c", "#042419"],
+                    // tooltip: {
+                    //   show: true,
+                    //   backgroundColor: "rgba(0, 0, 0, .8)"
+                    // },
+                    // formatter: function(params) {
+                    //   return `${params.name}: (${params.value}sales)`;
+                    // },
+                    //   series: [
+                    //     {
+                    //       name: "Top Selling Products",
+                    //       type: "pie",
+                    //       radius: "50%",
+                    //       center: "50%",
+
+                    //       data: responseData.product_report.original,
+                    //       itemStyle: {
+                    //         emphasis: {
+                    //           shadowBlur: 10,
+                    //           shadowOffsetX: 0,
+                    //           shadowColor: "rgba(0, 0, 0, 0.5)"
+                    //         }
+                    //       }
+                    //     }
+                    //   ]
+                    // };
+
+                    this.echartProduct = {
+                        color: [
+                            "#32d629",
+                            "#2db424",
+                            "#A78BFA",
+                            "#28a11f",
+                            "#238e1a",
+                        ],
+                        tooltip: {
+                            show: true,
+                            backgroundColor: "rgba(0, 0, 0, .8)",
+                        },
+                        formatter: function (params) {
+                            return `${params.name}: (${params.value}sales)`;
+                        },
+                        series: [
+                            {
+                                name: "Top Selling Products",
+                                type: "pie",
+                                radius: "50%",
+                                center: "50%",
+
+                                data: responseData.product_report.original,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: "rgba(0, 0, 0, 0.5)",
+                                    },
+                                },
+                            },
+                        ],
+                    };
+
+                    this.echartSales = {
+                        legend: {
+                            borderRadius: 0,
+                            orient: "horizontal",
+                            x: "right",
+                            data: ["Sales", "Purchases"],
+                        },
+                        grid: {
+                            left: "8px",
+                            right: "8px",
+                            bottom: "0",
+                            containLabel: true,
+                        },
+                        tooltip: {
+                            show: true,
+
+                            backgroundColor: "rgba(0, 0, 0, .8)",
+                        },
+
+                        xAxis: [
+                            {
+                                type: "category",
+                                data: responseData.sales.original.days,
+                                axisTick: {
+                                    alignWithLabel: true,
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                                axisLabel: {
+                                    color: dark_heading,
+                                    interval: 0,
+                                    rotate: 30,
+                                },
+                                axisLine: {
+                                    show: true,
+                                    color: dark_heading,
+
+                                    lineStyle: {
+                                        color: dark_heading,
+                                    },
+                                },
+                            },
+                        ],
+                        yAxis: [
+                            {
+                                type: "value",
+
+                                axisLabel: {
+                                    color: dark_heading,
+                                    // formatter: "${value}"
+                                },
+                                axisLine: {
+                                    show: false,
+                                    color: dark_heading,
+
+                                    lineStyle: {
+                                        color: dark_heading,
+                                    },
+                                },
+                                min: 0,
+                                splitLine: {
+                                    show: true,
+                                    interval: "auto",
+                                },
+                            },
+                        ],
+
+                        series: [
+                            {
+                                name: "Sales",
+                                data: responseData.sales.original.data,
+                                label: { show: false, color: "#8B5CF6" },
+                                type: "bar",
+                                color: "#00fdab",
+                                smooth: true,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowOffsetY: -2,
+                                        shadowColor: "rgba(0, 0, 0, 0.3)",
+                                    },
+                                },
+                            },
+                            {
+                                name: "Purchases",
+                                data: responseData.purchases.original.data,
+
+                                label: { show: false, color: "#0168c1" },
+                                type: "bar",
+                                barGap: 0,
+                                color: "#009766",
+                                smooth: true,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowOffsetY: -2,
+                                        shadowColor: "rgba(0, 0, 0, 0.3)",
+                                    },
+                                },
+                            },
+                        ],
+                    };
+                    this.loading = false;
+                })
+                .catch((response) => {});
+        },
+
+        //------------------------------Get Month -------------------------\\
+        GetMonth() {
+            var months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+            var now = new Date();
+            this.CurrentMonth = months[now.getMonth()];
+        },
+
+        //------------------------------Formetted Numbers -------------------------\\
+        formatNumber(number, dec) {
+            const value = (
+                typeof number === "string" ? number : number.toString()
+            ).split(".");
+            if (dec <= 0) return value[0];
+            let formated = value[1] || "";
+            if (formated.length > dec)
+                return `${value[0]}.${formated.substr(0, dec)}`;
+            while (formated.length < dec) formated += "0";
+            return `${value[0]}.${formated}`;
+        },
     },
-
-    //------------------------------Formetted Numbers -------------------------\\
-    formatNumber(number, dec) {
-      const value = (typeof number === "string"
-        ? number
-        : number.toString()
-      ).split(".");
-      if (dec <= 0) return value[0];
-      let formated = value[1] || "";
-      if (formated.length > dec)
-        return `${value[0]}.${formated.substr(0, dec)}`;
-      while (formated.length < dec) formated += "0";
-      return `${value[0]}.${formated}`;
-    }
-  },
-  async mounted() {
-    await this.all_dashboard_data();
-    this.GetMonth();
-  }
+    async mounted() {
+        await this.all_dashboard_data();
+        this.GetMonth();
+    },
 };
 </script>

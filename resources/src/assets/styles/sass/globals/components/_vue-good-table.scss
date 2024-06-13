@@ -4,8 +4,11 @@ color: white !important;
 }
 
 table.tableOne.vgt-table thead tr th {
-  color: white;
-  background: #55a446
+  color: #00fdab;
+  background: linear-gradient(70deg, #05100c, #042419, #05100c);
+  border-top: 3px solid #28a745; /* Green border */
+
+
 }
 table.tableOne.vgt-table {
   font-size: 13px;
@@ -75,7 +78,7 @@ table.tableOne tbody tr th.line-numbers {
   background: #fff;
 }
 table.tableOne tbody tr th.vgt-checkbox-col {
-  background: #55a446;
+  background: linear-gradient(70deg, #05100c, #042419, #05100c);
 }
 .vgt-wrap__footer .footer__navigation>button:first-of-type {
   margin-right: 0;

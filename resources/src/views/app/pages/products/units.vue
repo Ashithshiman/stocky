@@ -27,7 +27,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="table-hover tableOne vgt-table"
+        styleClass="table-hover tableOne vgt-table custom-product"
       >
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button @click="New_Unit()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">

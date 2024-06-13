@@ -217,6 +217,7 @@ content: '';
     border-radius: 15px;
     border: 3px solid #28a745; /* Green border */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    // padding: 15px 0px 0px 16px;
     
   }
 // warehouse
@@ -286,11 +287,24 @@ content: '';
   // product
 
 .custom-product{
-    background: linear-gradient(70deg, #193d2f, #1e613c, #143327);
+    background: transparent;
+    background: linear-gradient(70deg, #05100c, #042419, #05100c);
     color: white;
 
 
 }
+// custom padding
+.custom-no-padding-card {
+    padding: 0 !important;
+  }
+  .custom-no-padding-card .b-card-body {
+    padding: 0 !important;
+  }
+
+
+
+
+  
   .column {
     border-right: 2px solid #28a745; /* Green vertical line */
   }
