@@ -7,8 +7,7 @@
       <b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">
         <b-row >
           <b-col md="8" class="mb-2" >
-            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
-">
+            <b-card class="mt-3 card-combined" >
               <b-row >
                 <!-- Name -->
                 <b-col md="6" class="mb-2">
@@ -188,8 +187,7 @@
               </b-row>
             </b-card>
 
-            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
-" >
+            <b-card class="mt-3 card-combined "  >
               <b-row >
                 <!-- Type  -->
                 <b-col md="6" class="mb-2" >
@@ -412,8 +410,7 @@
               </b-row>
             </b-card>
            
-            <b-card class="mt-3" style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
-">
+            <b-card class="mt-3 card-combined" >
               <b-row>
                 <!-- Product_Has_Imei_Serial_number -->
                 <b-col md="12 mb-2">
@@ -444,10 +441,9 @@
             </b-card>
           </b-col>
 
-          <b-col md="4" >
+          <b-col md="4 " >
             <!-- upload-multiple-image -->
-            <b-card style="background: linear-gradient(70deg, #193d2f, #1e613c, #143327)
-">
+            <b-card class="card-combined">
               <div class="card-header">
                 <h5  style="color: white;">{{$t('MultipleImage')}}</h5>
               </div>

@@ -8,7 +8,6 @@
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: $card-bg;
   background-clip: border-box;
   border: $card-border-width solid $card-border-color;
   @include border-radius($card-border-radius);
@@ -36,9 +35,10 @@
   // as much space as possible, ensuring footers are aligned to the bottom.
   flex: 1 1 auto;
   color: white;
-  // padding: $card-spacer-x;
+  padding: $card-spacer-x;
   // padding: 15px 0px 0px 16px;
-  background: linear-gradient(70deg, #05100c, #042419, #05100c);
+
+  border-radius: 15;
 
 }
 
@@ -83,6 +83,7 @@ ild {
 
   &:first-child {
     @include border-radius($card-inner-border-radius $card-inner-border-radius 0 0);
+    color: white;
   }
 
   + .list-group {
@@ -295,6 +296,7 @@ ild {
   .card:not(:first-of-type) {
     .card-header:first-child {
       border-radius: 0;
+      color: white;
     }
   }
 
@@ -308,4 +310,8 @@ ild {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+}
+
+.card-theme{
+  background-color: blue !important;
 }

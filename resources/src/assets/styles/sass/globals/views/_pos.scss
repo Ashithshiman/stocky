@@ -30,6 +30,9 @@
 
   #pos .card-order{
     min-height: 100%;
+     background: transparent;
+    background: linear-gradient(70deg, #05100c, #042419, #05100c);
+    color: white;
   }
 
   #pos .card-order .main-header{

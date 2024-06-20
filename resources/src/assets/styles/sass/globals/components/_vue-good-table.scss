@@ -7,6 +7,7 @@ table.tableOne.vgt-table thead tr th {
   color: #00fdab;
   background: linear-gradient(70deg, #05100c, #042419, #05100c);
   border-top: 3px solid #28a745; /* Green border */
+  
 
 
 }
@@ -28,7 +29,8 @@ table.tableOne.vgt-table {
   box-shadow: unset!important;
 }
 div.vgt-wrap__footer.vgt-clearfix {
-  background: #fff;
+  background: linear-gradient(70deg, #05100c, #042419, #05100c);
+
   font-size: 14px;
 
 }
@@ -116,10 +118,7 @@ th.line-numbers {
   font-size: 14px;
   border: 0px solid #dcdfe6;
   thead th {
-    color: #fff !important;
-
-
-
+    color: #00fdab   !important;
     vertical-align: bottom;
     border-bottom: 0px solid #dcdfe6;
     padding-right: 1.5em;
@@ -127,6 +126,8 @@ th.line-numbers {
     min-width: 140px !important;
     font-size: 14px;
     font-weight: 600 !important;
+    background: linear-gradient(70deg, #05100c, #042419, #05100c) !important;;
+   
   }
   td {
     padding: 10px;
@@ -135,6 +136,8 @@ th.line-numbers {
     color: #fff !important;
     font-size: 14px;
     min-width: 140px !important;
+    background: linear-gradient(70deg, #05100c, #042419, #05100c);
+
   }
   tbody tr {
     transition: all 0.5s;

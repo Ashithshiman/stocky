@@ -172,7 +172,7 @@
             </div>
             <validation-observer ref="create_pos">
               <b-form @submit.prevent="Submit_Pos">
-                <b-card-body>
+                <b-card-body class="custom-product">
                   <b-row>
                     <!-- Customer -->
                     <b-col lg="12" md="12" sm="12">
@@ -221,7 +221,7 @@
                     <b-col md="12" class="mt-2">
                       <div class="pos-detail">
                         <div class="table-responsive">
-                          <table class="table table-striped">
+                          <table class="table table-striped custom-product">
                             <thead>
                               <tr>
                                 <th scope="col">{{$t('ProductName')}}</th>
@@ -251,7 +251,7 @@
                                     <b-input-group>
                                       <b-input-group-prepend>
                                         <span
-                                          class="btn btn-primary btn-sm"
+                                          class="btn custom-pos-button btn-sm"
                                           @click="decrement(detail ,detail.detail_id)"
                                         >-</span>
                                       </b-input-group-prepend>
@@ -264,7 +264,7 @@
 
                                       <b-input-group-append>
                                         <span
-                                          class="btn btn-primary btn-sm"
+                                          class="btn custom-pos-button btn-sm" style="border: 3px green !important;"
                                           @click="increment(detail.detail_id)"
                                         >+</span>
                                       </b-input-group-append>
@@ -545,7 +545,7 @@
 
         <!-- Card right Of Products -->
         <b-col md="7">
-          <b-card class="list-grid">
+          <b-card class="list-grid custom-product">
             <b-row>
               <b-col md="6">
                 <button v-b-toggle.sidebar-category class="btn btn-outline-info mt-1 btn-block">
@@ -657,7 +657,7 @@
                   </div>
                 </div>
                 <div
-                  class="card o-hidden bd-highlight m-1"
+                  class="card o-hidden bd-highlight m-1 custom-product"
                   v-for="brand in paginated_Brands"
                   :key="brand.id"
                   @click="Products_by_Brands(brand.id)"
@@ -706,6 +706,7 @@
           bg-variant="white"
           right
           shadow
+          class="custom-product"
         >
           <div class="px-3 py-2">
             <b-row>

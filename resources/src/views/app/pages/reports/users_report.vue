@@ -23,7 +23,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="tableOne table-hover vgt-table mt-3"
+        styleClass="custom-product  tableOne table-hover vgt-table mt-3"
       >
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">

@@ -17,7 +17,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-      styleClass="table-hover tableOne vgt-table"
+      styleClass="custom-product  table-hover tableOne vgt-table"
     >
      <div slot="table-actions" class="mt-2 mb-3">
         <b-button @click="export_PDF()" size="sm" variant="outline-success ripple m-1">

@@ -24,7 +24,7 @@
       </router-link> -->
       <router-link 
     v-if="currentUserPermissions && currentUserPermissions.includes('Pos_view')"
-    class="btn btn-outline-primary tn-sm btn-rounded custom-pos-button " style="border-color: #00fdab !important; color: #00fdab !important; "
+    class="btn  tn-sm btn-rounded custom-pos-button  "
     to="/app/pos"
 >
     <span class="ul-btn__text ml-1">POS</span>

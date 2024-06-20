@@ -12,7 +12,7 @@
             class="sidebar-left rtl-ps-none ps scroll  "
             :style="{
         // backgroundColor: selectedParentMenu == 'dashboard' ? '#050a08' : '',
-        borderRight: selectedParentMenu == 'dashboard' ? '3px solid #28a745' : ''
+        // borderRight: selectedParentMenu == 'dashboard' ? '3px solid ##28a745' : ''
     }"
         >
             <div>

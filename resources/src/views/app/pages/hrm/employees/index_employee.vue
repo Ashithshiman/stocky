@@ -28,7 +28,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="tableOne table-hover vgt-table"
+        styleClass="custom-product tableOne table-hover vgt-table"
       >
         <div slot="selected-row-actions">
           <button 

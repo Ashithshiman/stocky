@@ -70,9 +70,9 @@
                 
                 <!-- Products -->
                 <b-col md="12">
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead class="bg-gray-300">
+                  <div class="table-responsive ">
+                    <table class="table table-hover custom-product">
+                      <thead class="table-heading">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">{{$t('CodeProduct')}}</th>

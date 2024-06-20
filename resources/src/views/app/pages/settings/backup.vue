@@ -10,7 +10,7 @@
         :columns="columns"
         :totalRows="totalRows"
         :rows="backups"
-        styleClass="table-hover tableOne vgt-table"
+        styleClass="custom-product table-hover tableOne vgt-table"
       >
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button

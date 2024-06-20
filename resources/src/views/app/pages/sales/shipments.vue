@@ -27,7 +27,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        :styleClass="showDropdown?'tableOne table-hover vgt-table full-height':'tableOne table-hover vgt-table non-height'"
+     :styleClass="showDropdown?'custom-product tableOne table-hover vgt-table full-height':'custom-product tableOne table-hover vgt-table non-height'"
       >
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button @click="Shipments_pdf()" size="sm" variant="outline-success ripple m-1">

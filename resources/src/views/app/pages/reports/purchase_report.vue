@@ -42,7 +42,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        :styleClass="'order-table vgt-table'"
+        :styleClass="'custom-product order-table vgt-table'"
       >
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button variant="outline-info ripple m-1" size="sm" v-b-toggle.sidebar-right>

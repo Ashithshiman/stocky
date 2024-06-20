@@ -23,7 +23,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="tableOne table-hover vgt-table mt-3"
+        styleClass="custom-product tableOne table-hover vgt-table mt-3"
       >
 
        <div slot="table-actions" class="mt-2 mb-3 quantity_alert_warehouse">

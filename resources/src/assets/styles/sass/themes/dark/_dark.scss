@@ -27,10 +27,10 @@
   h6,
   .card-title,
   .text-title {
-    color: $dark-heading;
+    color: white !important;
   }
   .card-title {
-    color: $dark-heading !important;
+    color:  white !important;
   }
   a {
     // background: $dark-bg;
@@ -40,7 +40,7 @@
   textarea {
     background: $dark-forground !important;
     border-color: $dark-bg;
-    color: $dark-heading !important;
+    color:  white!important;
   }
 
   .app-footer {
@@ -294,7 +294,8 @@
 
   .order-table.vgt-table {
     tbody tr:hover {
-      background: $dark-forground;
+      background: linear-gradient(70deg, #05100c, #042419, #05100c);
+
       border-radius: 10px;
     }
   }

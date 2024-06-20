@@ -3,7 +3,7 @@
     <breadcumb :page="$t('Categories')" :folder="$t('Products')"/>
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3" ></div>
-    <b-card class="wrapper" style="padding: 0;" v-if="!isLoading" >
+    <b-card class="wrapper"  v-if="!isLoading" >
       <vue-good-table
         mode="remote"
         :columns="columns"

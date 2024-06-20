@@ -29,7 +29,7 @@
       </b-row> -->
             <b-row>
                 <b-col lg="4" md="4" sm="12">
-                    <b-form-group :label="$t('Filter_by_warehouse')">
+                    <b-form-group label-class = " custom-label" :label="$t('Filter_by_warehouse')">
                         <v-select
                             @input="Selected_Warehouse"
                             v-model="warehouse_id"
@@ -46,10 +46,12 @@
                     </b-form-group>
                 </b-col>
             </b-row>
-            <b-row>
+
+            
+            <b-row  >
                 <b-col lg="12" md="12" sm="12">
-                    <b-card class="card-combined mb-30 text-center">
-                        <b-row no-gutters>
+                    <b-card class="card-combined mb-30 text-center card-theme">
+                        <b-row style="padding: 0;">
                             <b-col lg="3" md="6" sm="12" class="column">
                                 <router-link
                                     tag="a"
@@ -248,8 +250,8 @@
             <b-row>
                 <!-- Stock Alert -->
                 <div class="col-md-8">
-                    <div class="card-combined card mb-30">
-                        <div class="card-combined p-2">
+                    <div class="card-combined dash-fix card mb-30">
+                        <div class=" p-2">
                             <h5 class="card-title border-bottom p-3 mb-2">
                                 {{ $t("StockAlert") }}
                             </h5>
@@ -278,8 +280,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card mb-30">
-                        <div class="card-combined p-3">
+                    <div class="card-combined card mb-30">
+                        <div class=" p-3">
                             <h5 class="card-title border-bottom p-3 mb-2">
                                 {{ $t("Top_Selling_Products") }} ({{
                                     CurrentMonth
@@ -664,7 +666,12 @@ export default {
                         },
                         legend: {
                             data: ["Payment sent", "Payment received"],
+                            textStyle: {
+                                color: "#FFFFFF", // Change legend text color to white
+                            }
                         },
+                        
+                        
                         grid: {
                             left: "3%",
                             right: "4%",
@@ -803,6 +810,9 @@ export default {
                             orient: "horizontal",
                             x: "right",
                             data: ["Sales", "Purchases"],
+                            textStyle: {
+            color: '#FFFFFF' // Change legend text color to white
+        }
                         },
                         grid: {
                             left: "8px",
@@ -869,7 +879,7 @@ export default {
                             {
                                 name: "Sales",
                                 data: responseData.sales.original.data,
-                                label: { show: false, color: "#8B5CF6" },
+                                label: { show: false, color: "#fff" },
                                 type: "bar",
                                 color: "#00fdab",
                                 smooth: true,

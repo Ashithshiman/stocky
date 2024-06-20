@@ -28,7 +28,7 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="tableOne table-hover vgt-table mt-4"
+        styleClass="custom-product  tableOne table-hover vgt-table mt-4"
       >
        <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">

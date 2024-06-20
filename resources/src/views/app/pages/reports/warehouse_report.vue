@@ -25,7 +25,7 @@
           <i class="i-Full-Cart"></i>
           <div class="content">
             <p class="text-muted mt-2 mb-0">{{$t('Sales')}}</p>
-            <p class="text-primary text-24 line-height-1 mb-2">{{total.sales}}</p>
+            <p class="custom-text text-24 line-height-1 mb-2">{{total.sales}}</p>
           </div>
         </b-card>
       </b-col>
@@ -34,7 +34,7 @@
           <i class="i-Checkout-Basket"></i>
           <div class="content">
             <p class="text-muted mt-2 mb-0">{{$t('Purchases')}}</p>
-            <p class="text-primary text-24 line-height-1 mb-2">{{total.purchases}}</p>
+            <p class="custom-text text-24 line-height-1 mb-2">{{total.purchases}}</p>
           </div>
         </b-card>
       </b-col>
@@ -43,7 +43,7 @@
           <i class="i-Turn-Left"></i>
           <div class="content">
             <p class="text-muted mt-2 mb-0">{{$t('PurchasesReturn')}}</p>
-            <p class="text-primary text-24 line-height-1 mb-2">{{total.ReturnPurchase}}</p>
+            <p class="custom-text text-24 line-height-1 mb-2">{{total.ReturnPurchase}}</p>
           </div>
         </b-card>
       </b-col>
@@ -52,7 +52,7 @@
           <i class="i-Turn-Right"></i>
           <div class="content">
             <p class="text-muted mt-2 mb-0">{{$t('SalesReturn')}}</p>
-            <p class="text-primary text-24 line-height-1 mb-2">{{total.ReturnSale}}</p>
+            <p class="custom-text text-24 line-height-1 mb-2">{{total.ReturnSale}}</p>
           </div>
         </b-card>
       </b-col>
@@ -61,7 +61,7 @@
     <b-row v-if="!isLoading">
       <b-col md="12">
         <b-card no-body class="card mb-30" header-bg-variant="transparent ">
-          <b-tabs active-nav-item-class="nav nav-tabs" content-class="mt-3">
+          <b-tabs active-nav-item-class="nav nav-tabs custom-product" content-class="mt-3">
             <!-- Quotations Table -->
             <b-tab :title="$t('Quotations')">
               <vue-good-table
@@ -1105,7 +1105,7 @@ export default {
           var dark_heading = "#c2c6dc";
 
           this.Stock_Count = {
-            color: ["#6D28D9", "#A78BFA", "#7C3AED", "#8B5CF6", "#C4B5FD"],
+            color: ["#00fdab"],  // Update chart color here
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)",
@@ -1139,7 +1139,7 @@ export default {
             ]
           };
           this.Stock_value = {
-            color: ["#6D28D9", "#A78BFA", "#7C3AED", "#8B5CF6", "#C4B5FD"],
+            olor: ["#00fdab"],  // Update chart color here
             tooltip: {
               show: true,
               backgroundColor: "rgba(0, 0, 0, .8)",

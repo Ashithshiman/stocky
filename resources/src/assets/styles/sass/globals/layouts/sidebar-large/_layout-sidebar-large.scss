@@ -25,7 +25,7 @@
     top: $topbar-height;
     height: calc(100vh - #{$topbar-height});
     color: #00fdab !important;
-    background: linear-gradient(70deg, #05100c, #042419, #05100c) !important;
+    background: #050a08 !important;
 
     box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06),
       0 1px 4px rgba(0, 0, 0, 0.08);
@@ -36,6 +36,7 @@
     transition: left 0.24s ease-in-out;
     &.open {
       left: 0;
+      filter: drop-shadow(0 0 5px #28a745); /* Glowing effect */
     }
     .logo {
       display: none;
@@ -66,7 +67,7 @@
           color: #00fdab;
           .nav-item-hold {
             color: #ffffff;
-            background: linear-gradient(70deg, #05100c, #042419, #05100c);
+            // background: linear-gradient(70deg, #05100c, #042419, #05100c);
 
           }
         }

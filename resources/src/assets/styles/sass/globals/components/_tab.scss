@@ -5,11 +5,11 @@
             border: 0;
             padding: 1rem;
             &:not(.disabled) {
-                color: inherit;
+                color: white;
             }
             &.active {
                 border-bottom: 2px solid $primary;
-                background: rgba($color: $primary, $alpha: .1);
+                background: #00fdab;
             }
         }
         .dropdown-toggle {

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content  ">
     <breadcumb :page="$t('SuppliersReport')" :folder="$t('Reports')"/>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
 
@@ -75,7 +75,7 @@
                   nextLabel: 'next',
                   prevLabel: 'prev',
                 }"
-                styleClass="tableOne table-hover vgt-table"
+                styleClass="custom-product tableOne table-hover vgt-table"
               >
                <div slot="table-actions" class="mt-2 mb-3">
                 <b-button @click="Purchase_PDF()" size="sm" variant="outline-success ripple m-1">
@@ -136,7 +136,7 @@
                   nextLabel: 'next',
                   prevLabel: 'prev',
                 }"
-                styleClass="tableOne table-hover vgt-table"
+                styleClass="custom-product  tableOne table-hover vgt-table"
               >
                <div slot="table-actions" class="mt-2 mb-3">
                 <b-button @click="Returns_Purchase_PDF()" size="sm" variant="outline-success ripple m-1">
@@ -201,7 +201,7 @@
                   nextLabel: 'next',
                   prevLabel: 'prev',
                 }"
-                styleClass="tableOne table-hover vgt-table"
+                styleClass="custom-product  tableOne table-hover vgt-table"
               >
                <div slot="table-actions" class="mt-2 mb-3">
                 <b-button @click="Payments_PDF()" size="sm" variant="outline-success ripple m-1">

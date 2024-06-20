@@ -9,7 +9,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     background: #050a08 !important;
-    border-bottom: 3px solid #28a745; /* Green bottom border */
+    // border-bottom: 3px solid #28a745; /* Green bottom border */
+    filter: drop-shadow(0 0 5px #28a745); /* Glowing effect */
 
     z-index: 100;
     .menu-toggle {

@@ -1,11 +1,13 @@
 .nav-tabs {
-    border-bottom: 1px solid $primary;
+    border-bottom: 1px solid #00fdab;
 }
 
 .nav-tabs .nav-item .nav-link.active {
     border: 1px solid transparent;
-    background: rgba(102, 51, 153, .1);
-    border-color: $primary $primary $background;
+   background-color: #00fdab;
+    border-color: #00fdab;
+    color: black;
+
 }
 
 .dropdown-toggle:after {
